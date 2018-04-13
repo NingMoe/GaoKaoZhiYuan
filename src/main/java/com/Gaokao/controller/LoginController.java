@@ -29,7 +29,7 @@ public class LoginController {
             List collegeList = collegeInfoService.getAllCollege();
             httpSession.setAttribute("user",user);
             model.addAttribute("collegeList",collegeList);
-            return "userBaseInfo";
+            return "collegeInfo";
         }
         else {
             return "error";

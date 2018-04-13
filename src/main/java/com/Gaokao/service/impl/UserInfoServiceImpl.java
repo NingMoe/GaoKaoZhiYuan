@@ -23,11 +23,21 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    public UserBaseInfo getUserById(int id) {
+        return userBaseInfoMapper.getUserById(id);
+    }
+
+    @Override
     public void addUser(UserBaseInfo userBaseInfo) {
         UserBaseInfo userInfo = userBaseInfoMapper.getUserByName(userBaseInfo.getLoginName());
         if(userInfo==null){
             userBaseInfoMapper.addUser(userBaseInfo);
         }
 
+    }
+
+    @Override
+    public int updateUserInfo(int id, String loginName, String passwd) {
+        return userBaseInfoMapper.updateUserInfo(id,loginName,passwd);
     }
 }

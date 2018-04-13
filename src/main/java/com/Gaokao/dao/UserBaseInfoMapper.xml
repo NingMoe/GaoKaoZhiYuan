@@ -13,9 +13,19 @@
     <select id="getUserByName"  resultMap="userResultMap">
         select * from user_base_info where login_name=#{loginName}
     </select>
-    <insert id="insertAndGetId" useGeneratedKeys="true" keyProperty="userId" parameterType="com.Gaokao.entity.UserBaseInfo">
+    <select id="getUserById"  resultMap="userResultMap">
+        select * from user_base_info where uid=#{id}
+    </select>
+    <insert id="addUser"  parameterType="com.Gaokao.entity.UserBaseInfo">
 	insert into user_base_info(login_name,password)
 	values(#{loginName},#{passwd})
     </insert>
+    <update id="updateUserInfo" parameterType="com.Gaokao.entity.UserBaseInfo">
+    update
+    user_base_info
+    set login_name=#{1},password=#{2}
+    where
+    uid=#{0}
+</update>
 
 </mapper>

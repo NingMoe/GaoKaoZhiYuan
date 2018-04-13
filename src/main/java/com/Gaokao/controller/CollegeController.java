@@ -19,6 +19,6 @@ public class CollegeController {
     public String selectAllCollege(Model model){
         List collegeList = collegeInfoService.getAllCollege();
         model.addAttribute("collegeList",collegeList);
-        return "userBaseInfo";
+        return "collegeInfo";
     }
 }
