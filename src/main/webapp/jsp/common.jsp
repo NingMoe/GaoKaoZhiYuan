@@ -36,8 +36,8 @@
                         <img src="../images/user.png" class="nav-avatar" />
                         <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">个人基本信息</a></li>
-                            <li><a href="#">修改账号密码</a></li>
+                            <li><a href="${pageContext.request.contextPath}/jsp/userBaseInfo.jsp">个人基本信息</a></li>
+                            <li><a href="${pageContext.request.contextPath}/jsp/changeInfo.jsp">修改账号密码</a></li>
                             <li class="divider"></li>
                             <li><a href="#">注销</a></li>
                         </ul>

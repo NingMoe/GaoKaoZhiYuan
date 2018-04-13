@@ -40,40 +40,37 @@
                                     高校信息</h3>
                             </div>
                             <div class="module-body table">
-                                <table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display"
-                                       width="100%">
-                                    <thead>
-                                    <tr>
-                                        <th>
-                                            高校代码
-                                        </th>
-                                        <th>
-                                            高校名称
-                                        </th>
-                                        <th>
-                                            高校所在城市
-                                        </th>
-                                        <th>
-                                            高校详细介绍
-                                        </th>
-                                        <th>
-                                            高校分类
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach items="${collegeList}" var="college">
-                                    <tr>
-                                        <td>${college.id}</td>
-                                        <td>${college.name}</td>
-                                        <td>${college.sf}</td>
-                                        <td>${college.detail}</td>
-                                        <td>${college.type}</td>
-                                    </tr>
-                                    </c:forEach>
+                                <tr>
+                                    <td>
+                                        账号名
+                                    </td>
+                                    <td>${user.loginName}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        真实姓名
+                                    </td>
+                                    <td>${user.realName}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        住址
+                                    </td>
+                                    <td>${user.address}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        电话
+                                    </td>
+                                    <td>${user.phone}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        性别
+                                    </td>
+                                    <td>${user.sex}</td>
+                                </tr>
 
-                                    </tfoot>
-                                </table>
                             </div>
                         </div>
                         <!--/.module-->
