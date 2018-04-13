@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,7 +17,7 @@ public class RegisterController {
     private UserInfoService uService;
 
     @RequestMapping("/userRegister")
-    public String UserLogin(UserBaseInfo userBaseInfo, HttpServletRequest request, Model model){
+    public String UserRegister(UserBaseInfo userBaseInfo, HttpServletRequest request, Model model){
         UserBaseInfo user = uService.isUserLegal(userBaseInfo);
         if(user==null){
            uService.addUser(userBaseInfo);
@@ -26,5 +27,15 @@ public class RegisterController {
         else {
             return "error";
         }
+    }
+
+    @RequestMapping("/check")
+    @ResponseBody
+    public String getUserByLoginName(String loginName){
+        String flag="noRegister";
+        if(uService.getUserByName(loginName)!=null){
+            flag="hasRegister";
+        }
+        return flag;
     }
 }

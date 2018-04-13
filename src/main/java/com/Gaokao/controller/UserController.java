@@ -25,4 +25,5 @@ public class UserController {
         session.setAttribute("user",userBaseInfo);
         return "changeInfo";
     }
+
 }

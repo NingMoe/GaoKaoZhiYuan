@@ -28,6 +28,11 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    public UserBaseInfo getUserByName(String loginName) {
+        return userBaseInfoMapper.getUserByName(loginName);
+    }
+
+    @Override
     public void addUser(UserBaseInfo userBaseInfo) {
         UserBaseInfo userInfo = userBaseInfoMapper.getUserByName(userBaseInfo.getLoginName());
         if(userInfo==null){

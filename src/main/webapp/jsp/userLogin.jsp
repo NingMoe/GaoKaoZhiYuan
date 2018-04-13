@@ -55,14 +55,14 @@
     <div class="container">
         <div class="row">
             <div class="module module-login span4 offset4">
-                <form class="form-vertical" action="/ga/login/userlogin.do" method="post">
+                <form class="form-vertical" action="/ga/login/userlogin.do" method="post" >
                     <div class="module-head">
                         <h3>Sign In</h3>
                     </div>
                     <div class="module-body">
                         <div class="control-group">
                             <div class="controls row-fluid">
-                                <input class="span12" type="text" name="loginName" placeholder="loginName">
+                                <input class="span12" type="text"  name="loginName" placeholder="loginName">
                             </div>
                         </div>
                         <div class="control-group">
@@ -74,7 +74,7 @@
                     <div class="module-foot">
                         <div class="control-group">
                             <div class="controls clearfix">
-                                <button type="submit" class="btn btn-primary pull-right">Login</button>
+                                <button type="submit" class="btn btn-primary pull-right" >Login</button>
                                 <label class="checkbox">
                                     <input type="checkbox"> Remember me
                                 </label>
@@ -94,8 +94,8 @@
         <b class="copyright">高考志愿填报系统</b> All rights reserved.
     </div>
 </div>
-<script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
-<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="../scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>
