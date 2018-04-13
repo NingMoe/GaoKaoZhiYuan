@@ -173,32 +173,7 @@
     </dependency>
 
   </dependencies>
-  <repositories>
-    <repository>
-      <id>melot-nexus</id>
-      <name>Melot Nexus Public Repositories</name>
-      <url>http://maven.kktv2.com:8081/nexus/content/groups/public/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>melot-nexus</id>
-      <name>Melot Nexus Public Repositories</name>
-      <url>http://maven.kktv2.com:8081/nexus/content/groups/public/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
+
 
   <build>
     <finalName>GaoKaoZhiYuan</finalName>

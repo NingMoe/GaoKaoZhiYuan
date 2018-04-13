@@ -9,5 +9,8 @@
         <module name="GaoKaoZhiYuan" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="GaoKaoZhiYuan" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
