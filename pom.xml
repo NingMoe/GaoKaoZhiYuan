@@ -173,7 +173,7 @@
     </dependency>
 
   </dependencies>
-  <repositories>
+<!--  <repositories>
     <repository>
       <id>melot-nexus</id>
       <name>Melot Nexus Public Repositories</name>
@@ -198,7 +198,7 @@
         <enabled>false</enabled>
       </snapshots>
     </pluginRepository>
-  </pluginRepositories>
+  </pluginRepositories>-->
 
   <build>
     <finalName>GaoKaoZhiYuan</finalName>
