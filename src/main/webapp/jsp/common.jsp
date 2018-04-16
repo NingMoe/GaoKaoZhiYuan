@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <head>
@@ -112,6 +113,7 @@
                                     <tfoot>
                                     </tfoot>
                                 </table>
+                                <div id="pageCount"></div>
                             </div>
                         </div>
                         <!--/.module-->
