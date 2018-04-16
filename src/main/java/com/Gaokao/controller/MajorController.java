@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -16,9 +17,10 @@ public class MajorController {
     private MajorInfoService majorInfoService;
 
     @RequestMapping("/selectAllMajor")
-     public String selectAllMajor(Model model){
+    @ResponseBody
+     public List selectAllMajor(Model model){
         List majorList = majorInfoService.getAllMaj();
-        model.addAttribute("majorList",majorList);
-        return "majorInfo";
+        //model.addAttribute("majorList",majorList);
+        return majorList;
      }
 }

@@ -56,9 +56,9 @@
             <div class="span3">
                 <div class="sidebar">
                     <ul class="widget widget-menu unstyled">
-                        <li class="active"><a href="${pageContext.request.contextPath}/college/selectAllCollege.do"><i class="menu-icon icon-dashboard"></i>查询高校信息
+                        <li class="active"><a id="collegeAll"><i class="menu-icon icon-dashboard"></i>查询高校信息
                         </a></li>
-                        <li><a href="${pageContext.request.contextPath}/major/selectAllMajor.do"><i class="menu-icon icon-bullhorn"></i>查询专业信息</a>
+                        <li><a id="majorAll"><i class="menu-icon icon-bullhorn"></i>查询专业信息</a>
                         </li>
                     </ul>
 
@@ -67,17 +67,73 @@
                         <li><a href="ui-typography.html"><i class="menu-icon icon-book"></i>查询往年高校招生计划 </a></li>
                         <li><a href="ui-typography.html"><i class="menu-icon icon-book"></i>填报志愿 </a></li>
                     </ul>
-
                 </div>
                 <!--/.sidebar-->
             </div>
+            <!--/.span3-->
+            <div class="span9">
+                <div class="content">
+                    <div class="btn-controls">
+
+
+                        <!--/.module-->
+                        <div class="module hide">
+                            <div class="module-head">
+                                <h3>
+                                    Adjust Budget Range</h3>
+                            </div>
+                            <div class="module-body">
+                                <div class="form-inline clearfix">
+                                    <a href="#" class="btn pull-right">Update</a>
+                                    <label for="amount">
+                                        Price range:</label>
+                                    &nbsp;
+                                    <input type="text" id="amount" class="input-" />
+                                </div>
+                                <hr />
+                                <div class="slider-range">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="module">
+                            <div class="module-head" id="table_head">
+                            </div>
+                            <div class="module-body table">
+                                <table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display"
+                                       width="100%">
+                                    <thead>
+
+                                    </thead>
+
+                                    <tbody>
+
+                                    </tbody>
+                                    <tfoot>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!--/.module-->
+                    </div>
+                    <!--/.content-->
+                </div>
+                <!--/.span9-->
+            </div>
+        </div>
+        <!--/.container-->
+    </div>
+    <!--/.wrapper-->
+    <div class="footer">
+    </div>
 
     <script src="../scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
     <script src="../scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
     <script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="../scripts/flot/jquery.flot.js" type="text/javascript"></script>
     <script src="../scripts/flot/jquery.flot.resize.js" type="text/javascript"></script>
+    <script src="../scripts/js/common.js" type="text/javascript"></script>
+    <script src="../scripts/js/college.js" type="text/javascript"></script>
+    <script src="../scripts/js/major.js" type="text/javascript"></script>
     <script src="../scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
-    <script src="../scripts/common.js" type="text/javascript"></script>
-
 </body>

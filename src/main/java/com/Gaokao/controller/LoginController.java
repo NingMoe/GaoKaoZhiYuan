@@ -22,15 +22,18 @@ public class LoginController {
     @Autowired
     private CollegeInfoService collegeInfoService;
 
+    @RequestMapping("/index")
+    public String UserIndex(){
+        return "userLogin";
+    }
+
     @RequestMapping("/userlogin")
     public String UserLogin(UserBaseInfo userBaseInfo, Model model,HttpSession httpSession){
         UserBaseInfo user = uService.isUserLegal(userBaseInfo);
 
         if(user!=null){
-            List collegeList = collegeInfoService.getAllCollege();
             httpSession.setAttribute("user",user);
-            model.addAttribute("collegeList",collegeList);
-            return "collegeInfo";
+            return "common";
         }
         else {
             return "error";
