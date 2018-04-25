@@ -10,6 +10,7 @@
         <link type="text/css" href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link type="text/css" href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="../css/theme.css" rel="stylesheet">
+        <link type="text/css" href="../css/page.css" rel="stylesheet">
         <link type="text/css" href="../images/icons/css/font-awesome.css" rel="stylesheet">
         <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
               rel='stylesheet'>
@@ -66,7 +67,7 @@
                     <ul class="widget widget-menu unstyled">
                         <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 查询往年一分一段表 </a></li>
                         <li><a href="ui-typography.html"><i class="menu-icon icon-book"></i>查询往年高校招生计划 </a></li>
-                        <li><a href="ui-typography.html"><i class="menu-icon icon-book"></i>填报志愿 </a></li>
+                        <li><a id="planAll"><i class="menu-icon icon-book"></i>填报志愿 </a></li>
                     </ul>
                 </div>
                 <!--/.sidebar-->
@@ -97,12 +98,48 @@
                             </div>
                         </div>
                     </div>
+                    <form class="navbar-search pull-left input-append" action="#" style="float: right;">
+                        <div class="form-group" style="float:  left;">
+                            <%--<label for="rankSelect" class="col-sm-3 control-label" style="float:  left;">排名</label>--%>
+                            <div class="col-sm-9">
+                                <select class="selectpicker" id="rankSelect" name="rankSelect"
+                                        data-width="100%" style="width:  100px;margin-right:  50px">
+                                    <optgroup label="类别">
+                                        <option>排名</option>
+                                        <option>法学</option>
+                                        <option>工学</option>
+                                        <option>管理学</option>
+                                        <option>教育学</option>
+                                        <option>经济学</option>
+                                        <option>理学</option>
+                                        <option>历史学</option>
+                                        <option>农学</option>
+                                        <option>文学</option>
+                                        <option>医学</option>
+                                        <option>哲学</option>
+                                        <option>综合</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <input style="height: 30px;" type="text" class="span3" id="searchInput" placeholder="高校名查询">
+                        <button class="btn" type="button" id="searchBtn">
+                            <i class="icon-search"></i>
+                        </button>
+                        <button class="btn" style="margin-left: 10px;" type="button" id="compareBtn">
+                            高校对比
+                        </button>
+                        <button class="btn" style="margin-left: 10px;" type="button" id="homeBtn">
+                            回到首页
+                        </button>
+                    </form>
+
                         <div class="module">
                             <div class="module-head" id="table_head">
                             </div>
                             <div class="module-body table">
                                 <table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display"
-                                       width="100%">
+                                       width="100%" style="table-layout:  fixed;">
                                     <thead>
 
                                     </thead>
@@ -137,5 +174,6 @@
     <script src="../scripts/js/common.js" type="text/javascript"></script>
     <script src="../scripts/js/college.js" type="text/javascript"></script>
     <script src="../scripts/js/major.js" type="text/javascript"></script>
+    <script src="../scripts/js/collegePlan.js" type="text/javascript"></script>
     <script src="../scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
 </body>

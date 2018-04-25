@@ -1,5 +1,8 @@
 package com.Gaokao.entity;
 
+/**
+ * 院校基本信息实体类
+ */
 public class CollegeInfo {
     private String id;
     private String name;

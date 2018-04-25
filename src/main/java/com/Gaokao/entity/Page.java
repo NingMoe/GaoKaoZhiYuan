@@ -2,12 +2,15 @@ package com.Gaokao.entity;
 
 import java.util.List;
 
+/**
+ * 通用分页实体类
+ */
 public class Page<T> {
 
     //当前页
     private int currentPage=1;
     //页面显示数
-    private int pageSize=5;
+    private int pageSize=10;
     //总记录条数
     private int rowCount;
     //总页数
@@ -73,8 +76,6 @@ public class Page<T> {
 
     public void setRow(List<T> row) {
         this.row = row;
-        rowCount = row.size();
-        pageCount =( (rowCount%pageSize==0)?(rowCount/pageSize):(rowCount/pageSize+1) );
     }
     public void setRow(List<T> row,int page) {
         this.currentPage = page;
