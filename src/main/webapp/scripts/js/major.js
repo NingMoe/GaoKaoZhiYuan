@@ -3,12 +3,13 @@ $(document).ready(function () {
     //判断是否是对比查询引起的翻页行为
     var flag = false;
     $('#majorAll').click(function () {
-
+        $(".navbar-search.pull-left.input-append").show();
         $("#searchInput").val("");
         url = majorUrl;
         majorName = "";
         item={};
         currentPage = 1;
+        $("#pageCount").show();
         $("#compareBtn").hide();
         $(".form-group").hide();
         getData(url,currentPage, majorName, item);

@@ -9,12 +9,50 @@
         <result property="zsid" column="zs_id" />
         <result property="uid" column="uid" />
         <result property="px" column="px" />
+        <result property="collegeId" column="college_id" />
+        <result property="collegeName" column="college_name" />
+        <result property="sf" column="sf" />
+        <result property="majorId" column="major_id" />
+        <result property="majorName" column="major_name" />
     </resultMap>
+
     <!--postgre没有ifnull函数，COALESCE作用类似，也可以通过Integer判断是否非空（注意是Integer不是int） -->
     <select id="getApplicationRank" resultType="java.lang.Integer" >
         select COALESCE(MAX(px),0) from college_application
     </select>
-    <select id="getApplicatonByUid" resultMap="applicationResultMap">
+    <select id="getAppInfo"  resultMap="applicationResultMap">
+        select * from college_application
+        where zs_id=#{0} and uid=#{1}
+    </select>
+    <!-- 选出排序靠前和靠后的最近一个志愿-->
+    <select id="getRankClose"  resultMap="applicationResultMap">
+
+        SELECT * from college_application
+        where px in
+        <if test='_parameter.get("0")=="moveup"'>
+        (select MAX(px) from  college_application
+        <![CDATA[where px<        ]]>
+        </if>
+        <if test='_parameter.get("0")=="movedown"'>
+          (select MIN(px) from  college_application
+         <![CDATA[  where px> ]]>
+        </if>
+        (SELECT px FROM college_application
+        where zs_id=#{1} and uid =#{2})
+        )
+
+    </select>
+    <select id="getApplicationAllByUid" resultMap="applicationResultMap">
+        SELECT cs.college_id,c.college_name,cs.major_id,cs.major_name,cs.zs_id,c.sf FROM college_application ca ,college_zsjh cs,college c
+        where ca.zs_id = cs.zs_id and cs.college_id =c.college_id and uid = #{uid}
+        ORDER BY px
+    </select>
+    <update id="updateApplicationRank" parameterType="com.Gaokao.entity.CollegeApplicationInfo">
+        update  college_application
+        set px = #{0}
+        where zs_id = #{1} and uid =#{2}
+    </update>
+    <select id="getApplicationByUid" resultMap="applicationResultMap">
         select * from college_application WHERE uid=#{uid}
     </select>
     <insert id="addApplication"  parameterType="com.Gaokao.entity.CollegeApplicationInfo">

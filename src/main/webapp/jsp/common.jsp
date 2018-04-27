@@ -38,7 +38,7 @@
                         <img src="../images/user.png" class="nav-avatar" />
                         <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="${pageContext.request.contextPath}/jsp/userBaseInfo.jsp" >个人基本信息</a></li>
+                            <li><a id="userInfo" >个人基本信息</a></li>
                             <li><a href="${pageContext.request.contextPath}/jsp/changeInfo.jsp">修改账号密码</a></li>
                             <li class="divider"></li>
                             <li><a href="#">注销</a></li>
@@ -53,7 +53,7 @@
 </div>
 <!-- /navbar -->
 <div class="wrapper">
-    <div class="container">
+    <div class="container" style="width: 1570px">
         <div class="row">
             <div class="span3">
                 <div class="sidebar">
@@ -70,13 +70,13 @@
                         <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 查询往年一分一段表 </a></li>
                         <li><a href="ui-typography.html"><i class="menu-icon icon-book"></i>查询往年高校招生计划 </a></li>
                         <li><a id="planAll"><i class="menu-icon icon-book"></i>填报志愿 </a></li>
-                        <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 查看志愿 </a></li>
+                        <li><a id="applicationAll"><i class="menu-icon icon-bold"></i> 查看志愿 </a></li>
                     </ul>
                 </div>
                 <!--/.sidebar-->
             </div>
             <!--/.span3-->
-            <div class="span9">
+            <div class="span9" style="width: 1270px">
                 <div class="content">
                     <div class="btn-controls">
 
@@ -174,9 +174,10 @@
     <script src="../scripts/flot/jquery.flot.js" type="text/javascript"></script>
     <script src="../scripts/flot/jquery.flot.resize.js" type="text/javascript"></script>
     <script src="../scripts/js/common.js" type="text/javascript"></script>
-<script src="../scripts/js/userInfo.js" type="text/javascript"></script>
+    <script src="../scripts/js/userInfo.js" type="text/javascript"></script>
     <script src="../scripts/js/college.js" type="text/javascript"></script>
     <script src="../scripts/js/major.js" type="text/javascript"></script>
     <script src="../scripts/js/collegePlan.js" type="text/javascript"></script>
+    <script src="../scripts/js/collegeAppliaction.js" type="text/javascript"></script>
     <script src="../scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
 </body>

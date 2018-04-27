@@ -5,6 +5,8 @@ $(document).ready(function () {
     var flag = false;
     var temp = {};
     $('#collegeAll').click(function(){
+        $(".navbar-search.pull-left.input-append").show();
+        $("#pageCount").show();
         var array = "";
         $("#searchInput").val("");
          url = collegeUrl;

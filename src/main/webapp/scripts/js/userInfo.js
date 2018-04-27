@@ -38,6 +38,10 @@ $(document).ready(function () {
         $("tbody").html(str);
 
         $("#pageCount").hide();
+        $(".navbar-search.pull-left.input-append").hide();
     }
     getUserInfoData(userSelectUrl);
+    $("#userInfo").click(function () {
+        getUserInfoData(userSelectUrl);
+    })
 });

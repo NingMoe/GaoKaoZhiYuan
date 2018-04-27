@@ -34,7 +34,26 @@ public class CollegeApplicationServiceImpl implements CollegeApplicationService 
     }
 
     @Override
-    public List getApplicatonByUid(int uid) {
-        return collegeApplicationMapper.getApplicatonByUid(uid);
+    public List getApplicationByUid(int uid) {
+        return collegeApplicationMapper.getApplicationByUid(uid);
+    }
+
+    @Override
+    public List getApplicationAllByUid(int uid) {
+        return collegeApplicationMapper.getApplicationAllByUid(uid);
+    }
+
+    @Override
+    public boolean updateApplicationRank(String code,int zsid, int uid) {
+      CollegeApplicationInfo rank = collegeApplicationMapper.getRankClose(code,zsid,uid);
+      CollegeApplicationInfo co= collegeApplicationMapper.getAppInfo(zsid,uid);
+      int pxTemp;
+      if(rank!=null){
+          pxTemp = co.getPx();
+          collegeApplicationMapper.updateApplicationRank(rank.getPx(),co.getZsid(),co.getUid());
+          collegeApplicationMapper.updateApplicationRank(pxTemp,rank.getZsid(),rank.getUid());
+          return true;
+      }
+      return false;
     }
 }

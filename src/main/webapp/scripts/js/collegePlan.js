@@ -7,7 +7,7 @@ $(document).ready(function () {
     var flag = false;
     var array="";
     $('#planAll').click(function(){
-
+        $(".navbar-search.pull-left.input-append").show();
         //清空查询框
         $("#searchInput").val("");
          url = planUrl;

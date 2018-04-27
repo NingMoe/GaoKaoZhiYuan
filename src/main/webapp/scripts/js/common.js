@@ -26,6 +26,8 @@ $(document).ready(function () {
                     initCollegeHtml(page);
                 if(url.indexOf("selectAllMajor")>0)
                     initMajorHtml(page);
+                if(url.indexOf("application")>0)
+                    initAppHtml(page);
             },
             error:function(data){
             }
