@@ -1,0 +1,27 @@
+<?xml version ="1.0"encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Gaokao.dao.CollegeApplicationMapper">
+
+    <resultMap type="com.Gaokao.entity.CollegeApplicationInfo" id="applicationResultMap">
+        <id property="id" column="aid" />
+        <result property="zsid" column="zs_id" />
+        <result property="uid" column="uid" />
+        <result property="px" column="px" />
+    </resultMap>
+    <!--postgre没有ifnull函数，COALESCE作用类似，也可以通过Integer判断是否非空（注意是Integer不是int） -->
+    <select id="getApplicationRank" resultType="java.lang.Integer" >
+        select COALESCE(MAX(px),0) from college_application
+    </select>
+    <select id="getApplicatonByUid" resultMap="applicationResultMap">
+        select * from college_application WHERE uid=#{uid}
+    </select>
+    <insert id="addApplication"  parameterType="com.Gaokao.entity.CollegeApplicationInfo">
+	insert into college_application(zs_id,uid,px)
+	values(#{0},#{1},#{2})
+    </insert>
+    <delete id="deleteApplication" parameterType="com.Gaokao.entity.CollegeApplicationInfo">
+        DELETE FROM college_application WHERE zs_id = #{0} and uid = #{1}
+    </delete>
+</mapper>
