@@ -15,6 +15,10 @@
         <result property="xkkm1" column="college_cc" />
         <result property="xkkm1" column="college_cc" />
     </resultMap>
+    <select id="getPlanById"  resultMap="collegePlanResultMap">
+        select c1.*,c2.college_name,c2.sf from college_zsjh c1,college c2
+        where c1.college_id =c2.college_id and c1.zs_id=#{zsid}
+    </select>
     <select id="getAllCollegePlan"  resultMap="collegePlanResultMap">
         select c1.*,c2.college_name,c2.sf from college_zsjh c1,college c2
         where c1.college_id =c2.college_id
@@ -30,7 +34,7 @@
         order by cr.rank
     </select>
     <select id="getAllPlan"  resultMap="collegePlanResultMap">
-        select c1.*,c2.college_name,c2.sf from college_zsjh c1,college c2,college_rank cr
+        select  c1.*,c2.college_name,c2.sf from college_zsjh c1,college c2,college_rank cr
         where c1.college_id =c2.college_id and cr.college_id=c2.college_id
         <if test='_parameter.get("0")!=""'>
             and    c2.college_name like #{0}

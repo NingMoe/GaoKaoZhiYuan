@@ -32,10 +32,7 @@ public class CollegePlanController {
             String ids="";
             String type="";
             JSONObject jsonObject = JSONObject.fromObject(data);
-            type =  jsonObject.get("type")==null?"":(String)jsonObject.get("type");
-            if(type.equals("排名")){
-                type="";
-            }
+            type =  jsonObject.get("type")==null?"综合":(String)jsonObject.get("type");
             ids =  jsonObject.get("ids")==null?"":(String)jsonObject.get("ids");
         UserBaseInfo user = (UserBaseInfo) session.getAttribute("user");
         List planInfoList=new ArrayList();

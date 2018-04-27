@@ -38,7 +38,7 @@
                         <img src="../images/user.png" class="nav-avatar" />
                         <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="${pageContext.request.contextPath}/jsp/userBaseInfo.jsp">个人基本信息</a></li>
+                            <li><a href="${pageContext.request.contextPath}/jsp/userBaseInfo.jsp" >个人基本信息</a></li>
                             <li><a href="${pageContext.request.contextPath}/jsp/changeInfo.jsp">修改账号密码</a></li>
                             <li class="divider"></li>
                             <li><a href="#">注销</a></li>
@@ -65,9 +65,12 @@
                     </ul>
 
                     <ul class="widget widget-menu unstyled">
+                        <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 政策解读 </a></li>
+                        <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 在校咨询 </a></li>
                         <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 查询往年一分一段表 </a></li>
                         <li><a href="ui-typography.html"><i class="menu-icon icon-book"></i>查询往年高校招生计划 </a></li>
                         <li><a id="planAll"><i class="menu-icon icon-book"></i>填报志愿 </a></li>
+                        <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 查看志愿 </a></li>
                     </ul>
                 </div>
                 <!--/.sidebar-->
@@ -105,7 +108,7 @@
                                 <select class="selectpicker" id="rankSelect" name="rankSelect"
                                         data-width="100%" style="width:  100px;margin-right:  50px">
                                     <optgroup label="类别">
-                                        <option>排名</option>
+                                        <option>综合</option>
                                         <option>法学</option>
                                         <option>工学</option>
                                         <option>管理学</option>
@@ -117,7 +120,6 @@
                                         <option>文学</option>
                                         <option>医学</option>
                                         <option>哲学</option>
-                                        <option>综合</option>
                                     </optgroup>
                                 </select>
                             </div>
@@ -172,6 +174,7 @@
     <script src="../scripts/flot/jquery.flot.js" type="text/javascript"></script>
     <script src="../scripts/flot/jquery.flot.resize.js" type="text/javascript"></script>
     <script src="../scripts/js/common.js" type="text/javascript"></script>
+<script src="../scripts/js/userInfo.js" type="text/javascript"></script>
     <script src="../scripts/js/college.js" type="text/javascript"></script>
     <script src="../scripts/js/major.js" type="text/javascript"></script>
     <script src="../scripts/js/collegePlan.js" type="text/javascript"></script>

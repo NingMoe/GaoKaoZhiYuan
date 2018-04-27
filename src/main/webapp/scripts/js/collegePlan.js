@@ -1,8 +1,11 @@
 $(document).ready(function () {
     var planUrl=genurl+"/collegeplan/selectSuitCollegePlan.do";
-
+    var addAppUrl = genurl+"/application/addApplication.do"
+    var deleteAppUrl = genurl+"/application/deleteApplication.do"
+    var getAppByUidUrl = genurl+"/application/getApplicatonByUid.do";
     //判断是否是对比查询引起的翻页行为
     var flag = false;
+    var array="";
     $('#planAll').click(function(){
 
         //清空查询框
@@ -10,14 +13,18 @@ $(document).ready(function () {
          url = planUrl;
          currentPage=1;
          collegeName="";
+
          item={};
         $(".form-group").show();
+        $("#pageCount").show();
         $("#compareBtn").hide();
+        hasApplication();
         getData(url,currentPage,collegeName,item);
     });
 
     //根据数据动态绘制html
     initPlanHtml = function (page){
+        $("#pageCount").show();
         $('#table_head').html("<h3 >志愿填报<h3>");
         $("thead").html("<tr>" +
             "<th style=\"\n" + "width: 150px; text-align: center;\n" + "\">高校代码</th>" +
@@ -28,6 +35,7 @@ $(document).ready(function () {
             "<th style=\"\n" + " text-align:center;\n" + "\""+">选考科目1</th>" +
             "<th style=\"\n" + " text-align:center;\n" + "\""+">选考科目2</th>" +
             "<th style=\"\n" + " text-align:center;\n" + "\""+">选考科目3</th>" +
+            "<th style=\"\n" + " text-align:center;\n" + "\""+">操作</th>" +
             "</tr>");
         var data = page.row;
         currentPage = page.currentPage;
@@ -43,8 +51,12 @@ $(document).ready(function () {
                 "<td>" + ((data[i].majorName!=null)?data[i].majorName:"") + "</td>" +
                 "<td>" + ((data[i].xkkm1!=null)?data[i].xkkm1:"") + "</td>" +
                 "<td>" + ((data[i].xkkm2!=null)?data[i].xkkm2:"") + "</td>" +
-                "<td>" + ((data[i].xkkm3!=null)?data[i].xkkm3:"") + "</td>" +
-                "</tr>";
+                "<td>" + ((data[i].xkkm3!=null)?data[i].xkkm3:"") + "</td>" ;
+             if(!compareArray(data[i].zsId)) {
+                 str = str+"<td><button  class='addApplication' name='" + data[i].zsId + "'>+添加志愿</button></td>" ;
+             }
+             else str = str+"<td><button  class='addApplication' name='" + data[i].zsId + "'>-删除志愿</button></td>" ;
+            str = str + "</tr>";
         }
         $("tbody").html(str);
         var str2 = "";
@@ -64,6 +76,85 @@ $(document).ready(function () {
         item.type = type;
         collegeName = $("#searchInput").val();
         getData(url,currentPage,collegeName,item);
+    })
+
+    addApplication = function (id,obj) {
+        $.ajax({
+            url:addAppUrl,//请求地址
+            async: false,
+            type:'post',//请求类型
+            data:{'zsid':id},//传入后台数据
+            dataType:'text',//后台返回数据类型
+            success : function(data) {
+                if(data=="success"){
+                    obj.html("-删除志愿");
+                }
+            },
+            error:function(data){
+            }
+        })
+    };
+    compareArray = function(zsid){
+        var compareArray = {};
+        if(array!="") {
+            if (array.substring(array.length - 1, array.length) == ",") {
+                array.substring(0, array.length - 1);
+            }
+             compareArray = array.split(",");
+            zsid = ""+zsid+"";
+               if(compareArray.indexOf(zsid)>=0){
+                   return true;
+               }
+        }
+        return false;
+    };
+    hasApplication = function () {
+        $.ajax({
+            url:getAppByUidUrl,//请求地址
+            async: false,
+            type:'post',//请求类型
+            data:{},//传入后台数据
+            dataType:'text',//后台返回数据类型
+            success : function(appStr) {
+                array = appStr;
+            },
+            error:function(data){
+            }
+        })
+    };
+
+    deleteApplication = function (id,obj) {
+        $.ajax({
+            url:deleteAppUrl,//请求地址
+            async: false,
+            type:'post',//请求类型
+            data:{'zsid':id},//传入后台数据
+            dataType:'text',//后台返回数据类型
+            success : function(data) {
+              if(data=="success"){
+                  obj.html("+添加志愿");
+              }
+            },
+            error:function(data){
+            }
+        })
+    };
+    //添加志愿
+    $(document).on('click','.addApplication',function () {
+        var id = $(this).attr("name");
+        var val = $(this).text();
+        var obj = $(this);
+        if(val=="+添加志愿") {
+            array = array + id + ",";
+            addApplication(id,obj);
+            alert("添加成功");
+
+        }
+        else if(confirm("是否删除该志愿?")){
+            array = array.replace(id+",","");
+            deleteApplication(id,obj);
+            alert("删除成功");
+            }
     })
 });
 
