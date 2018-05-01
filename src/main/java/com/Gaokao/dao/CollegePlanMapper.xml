@@ -1,0 +1,47 @@
+<?xml version ="1.0"encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Gaokao.dao.CollegePlanMapper">
+
+    <resultMap type="com.Gaokao.entity.CollegePlanInfo" id="collegePlanResultMap">
+        <id property="zsId" column="zs_id" />
+        <result property="collegeId" column="college_id" />
+        <result property="collegeName" column="college_name" />
+        <result property="sf" column="sf" />
+        <result property="majorId" column="major_id" />
+        <result property="majorName" column="major_name" />
+        <result property="xkkm1" column="college_cc" />
+        <result property="xkkm1" column="college_cc" />
+        <result property="xkkm1" column="college_cc" />
+    </resultMap>
+    <select id="getPlanById"  resultMap="collegePlanResultMap">
+        select c1.*,c2.college_name,c2.sf from college_zsjh c1,college c2
+        where c1.college_id =c2.college_id and c1.zs_id=#{zsid}
+    </select>
+    <select id="getAllCollegePlan"  resultMap="collegePlanResultMap">
+        select c1.*,c2.college_name,c2.sf from college_zsjh c1,college c2
+        where c1.college_id =c2.college_id
+    </select>
+    <select id="getPlanByCollegeName"  resultMap="collegePlanResultMap">
+        <bind name="pattern" value="'%' + _parameter + '%'" />
+        select c1.*,c2.college_name from college_zsjh c1,college c2
+        where c1.college_id =c2.college_id and c2.college_name like #{pattern}
+    </select>
+    <select id="getCollegeRankByType"  resultMap="collegePlanResultMap">
+        select c1.*,c2.college_name,c2.sf from college_zsjh c1,college c2,college_rank cr
+        where c1.college_id =c2.college_id and cr.college_id=c2.college_id and cr.type=#{type}
+        order by cr.rank
+    </select>
+    <select id="getAllPlan"  resultMap="collegePlanResultMap">
+        select  c1.*,c2.college_name,c2.sf from college_zsjh c1,college c2,college_rank cr
+        where c1.college_id =c2.college_id and cr.college_id=c2.college_id
+        <if test='_parameter.get("0")!=""'>
+            and    c2.college_name like #{0}
+        </if>
+        <if test='_parameter.get("1")!=""'>
+        and cr.type=#{1}
+        order by cr.rank
+        </if>
+    </select>
+</mapper>

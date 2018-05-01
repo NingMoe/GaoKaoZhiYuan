@@ -16,4 +16,9 @@ public class MajorServiceImpl implements MajorInfoService {
     public List<MajorInfo> getAllMaj() {
         return majorInfoMapper.getAllMaj();
     }
+
+    @Override
+    public List getMajorByName(String name) {
+        return majorInfoMapper.getMajorByName(name);
+    }
 }

@@ -1,5 +1,10 @@
 package com.Gaokao.entity;
 
+import java.util.List;
+
+/**
+ * 用户基本信息实体类
+ */
 public class UserBaseInfo {
     private int id;
     private String loginName;
@@ -8,19 +13,11 @@ public class UserBaseInfo {
     private String address;
     private String phone;
     private String sex;
+    private List scoreList;
 
     public UserBaseInfo() {
     }
 
-    public UserBaseInfo(int id, String loginName, String passwd, String realName, String address, String phone, String sex) {
-        this.id = id;
-        this.loginName = loginName;
-        this.passwd = passwd;
-        this.realName = realName;
-        this.address = address;
-        this.phone = phone;
-        this.sex = sex;
-    }
 
     public int getId() {
         return id;
@@ -76,5 +73,13 @@ public class UserBaseInfo {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public List getScoreList() {
+        return scoreList;
+    }
+
+    public void setScoreList(List scoreList) {
+        this.scoreList = scoreList;
     }
 }

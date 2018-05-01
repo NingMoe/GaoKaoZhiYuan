@@ -17,4 +17,15 @@ public class CollegeServiceImpl implements CollegeInfoService {
     public List<CollegeInfo> getAllCollege() {
         return collegeInfoMapper.getAllCollege();
     }
+
+    @Override
+    public List getCollegeByName(String name) {
+       List collegeList = collegeInfoMapper.getCollegeByName(name);
+       return collegeList;
+    }
+
+    @Override
+    public CollegeInfo getAppById(String id) {
+        return collegeInfoMapper.getCollegeById(id);
+    }
 }

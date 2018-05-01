@@ -13,5 +13,13 @@
     <select id="getAllCollege"  resultMap="collegeResultMap">
         select * from college
     </select>
-
+    <select id="getCollegeByName"  resultMap="collegeResultMap">
+        <bind name="pattern" value="'%' + _parameter + '%'" />
+        select * from college
+        where college_name like #{pattern}
+    </select>
+    <select id="getCollegeById"  resultMap="collegeResultMap">
+	select * from college
+	where college_id=#{id}
+    </select>
 </mapper>
