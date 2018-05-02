@@ -86,7 +86,7 @@ local.properties
 .idea/**/tasks.xml
 .idea/**/dictionaries
 .idea/**/shelf
-.idea
+.idea/*
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
@@ -98,7 +98,7 @@ local.properties
 
 # Gradle
 .idea/**/gradle.xml
-.idea/**/libraries
+.idea/
 
 # CMake
 cmake-build-debug/
@@ -112,6 +112,8 @@ cmake-build-release/
 
 # IntelliJ
 out/
+target/
+*.iml
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
