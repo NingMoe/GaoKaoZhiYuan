@@ -21,6 +21,7 @@
         <div class="container">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
                 <i class="icon-reorder shaded"></i></a><a class="brand" >${user.realName}</a>
+            <span id="userInfoId" style="display: none">${user.id}</span>
             <div class="nav-collapse collapse navbar-inverse-collapse">
                 <ul class="nav nav-icons">
                     <li class="active"><a href="#"><i class="icon-envelope"></i></a></li>
@@ -66,7 +67,7 @@
 
                     <ul class="widget widget-menu unstyled">
                         <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 政策解读 </a></li>
-                        <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 在校咨询 </a></li>
+                        <li><a id="talkOnline"><i class="menu-icon icon-bold"></i> 在线咨询 </a></li>
                         <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 查询往年一分一段表 </a></li>
                         <li><a href="ui-typography.html"><i class="menu-icon icon-book"></i>查询往年高校招生计划 </a></li>
                         <li><a id="planAll"><i class="menu-icon icon-book"></i>填报志愿 </a></li>
@@ -135,7 +136,15 @@
                             回到首页
                         </button>
                     </form>
-
+                        <div id="talkdiv" style="display: none">
+                            Welcome<br/><textarea id="text" type="text"></textarea>
+                            <button onclick="send()">发送消息</button>
+                            <hr/>
+                            <button onclick="closeWebSocket()">关闭WebSocket连接</button>
+                            <hr/>
+                            <p id = "pid">${user.realName}</p>
+                            <div id="message" style="width: 500px;;height:500px; overflow:auto;"></div>
+                        </div>
                         <div class="module">
                             <div class="module-head" id="table_head">
                             </div>
@@ -179,5 +188,6 @@
     <script src="../scripts/js/major.js" type="text/javascript"></script>
     <script src="../scripts/js/collegePlan.js" type="text/javascript"></script>
     <script src="../scripts/js/collegeAppliaction.js" type="text/javascript"></script>
+<script src="../scripts/js/talk.js" type="text/javascript"></script>
     <script src="../scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
 </body>

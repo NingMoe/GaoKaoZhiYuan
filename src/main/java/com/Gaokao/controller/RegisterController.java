@@ -17,7 +17,7 @@ public class RegisterController {
     private UserInfoService uService;
 
     @RequestMapping("/userRegister")
-    public String UserRegister(UserBaseInfo userBaseInfo, HttpServletRequest request, Model model){
+    public String userRegister(UserBaseInfo userBaseInfo, HttpServletRequest request, Model model){
         UserBaseInfo user = uService.isUserLegal(userBaseInfo);
         if(user==null){
            uService.addUser(userBaseInfo);

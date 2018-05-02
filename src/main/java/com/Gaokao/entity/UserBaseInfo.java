@@ -1,11 +1,12 @@
 package com.Gaokao.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 用户基本信息实体类
  */
-public class UserBaseInfo {
+public class UserBaseInfo implements Serializable {
     private int id;
     private String loginName;
     private String passwd;

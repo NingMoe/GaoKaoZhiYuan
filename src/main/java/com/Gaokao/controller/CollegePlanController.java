@@ -35,7 +35,7 @@ public class CollegePlanController {
             type =  jsonObject.get("type")==null?"综合":(String)jsonObject.get("type");
             ids =  jsonObject.get("ids")==null?"":(String)jsonObject.get("ids");
         UserBaseInfo user = (UserBaseInfo) session.getAttribute("user");
-        List planInfoList=new ArrayList();
+        List planInfoList;
         collegeName = '%'+collegeName+'%';
         Page pageInfo = new Page();
         planInfoList = collegePlanService.getAllPlan(user.getScoreList(),collegeName,type);
