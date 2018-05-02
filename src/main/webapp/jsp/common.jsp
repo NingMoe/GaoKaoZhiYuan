@@ -80,27 +80,6 @@
             <div class="span9" style="width: 1270px">
                 <div class="content">
                     <div class="btn-controls">
-
-
-                        <!--/.module-->
-                        <div class="module hide">
-                            <div class="module-head">
-                                <h3>
-                                    Adjust Budget Range</h3>
-                            </div>
-                            <div class="module-body">
-                                <div class="form-inline clearfix">
-                                    <a href="#" class="btn pull-right">Update</a>
-                                    <label for="amount">
-                                        Price range:</label>
-                                    &nbsp;
-                                    <input type="text" id="amount" class="input-" />
-                                </div>
-                                <hr />
-                                <div class="slider-range">
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <form class="navbar-search pull-left input-append" action="#" style="float: right;">
                         <div class="form-group" style="float:  left;">
