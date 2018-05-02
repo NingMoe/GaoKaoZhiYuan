@@ -35,20 +35,19 @@ public class CollegePlanController {
             type =  jsonObject.get("type")==null?"综合":(String)jsonObject.get("type");
             ids =  jsonObject.get("ids")==null?"":(String)jsonObject.get("ids");
         UserBaseInfo user = (UserBaseInfo) session.getAttribute("user");
-        List planInfoList;
+        List<CollegePlanInfo> planInfoList;
         collegeName = '%'+collegeName+'%';
         Page pageInfo = new Page();
-        planInfoList = collegePlanService.getAllPlan(user.getScoreList(),collegeName,type);
+        int startIndex = (pageNum-1)*pageInfo.getPageSize();
+        //数据库分页
+        planInfoList = collegePlanService.getAllPlan(user.getScoreList(),collegeName,type,pageInfo.getPageSize(),startIndex);
 
-        pageInfo.setRow(planInfoList,pageNum);
-        List planInfoPageList=new ArrayList();
-        for (int i = pageInfo.getBeginIndex();i<= pageInfo.getEndIndex();i++) {
-            CollegePlanInfo col = (CollegePlanInfo) pageInfo.getRow().get(i);
-            if(col!=null) {
-                planInfoPageList.add(col);
-            }
+        int total = 0;
+        if(planInfoList!=null){
+            total = planInfoList.get(0).getTotalRecord();
         }
-        pageInfo.setRow(planInfoPageList);
+
+        pageInfo.setRow(planInfoList,pageNum,total);
         return pageInfo;
     }
 }

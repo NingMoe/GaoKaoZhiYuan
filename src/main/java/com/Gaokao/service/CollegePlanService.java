@@ -20,5 +20,5 @@ public interface CollegePlanService {
      * @param type （高校类型排名）
      * @return
      */
-    public List getAllPlan(List<ExamScoreInfo> scoreList,String collegeName,String type);
+    public List getAllPlan(List<ExamScoreInfo> scoreList,String collegeName,String type,int pageSize,int offset);
 }

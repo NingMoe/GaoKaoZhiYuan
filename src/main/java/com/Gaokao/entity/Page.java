@@ -85,4 +85,12 @@ public class Page<T> {
         this.beginIndex = (page-1)*pageSize;
         this.endIndex=((beginIndex+pageSize-1)<=rowCount)?(beginIndex+pageSize-1):(rowCount-1);
     }
+    public void setRow(List<T> row,int page,int total) {
+        this.currentPage = page;
+        this.row = row;
+        this.rowCount = total;
+        this.pageCount =( (rowCount%pageSize==0)?(rowCount/pageSize):(rowCount/pageSize+1) );
+        this.beginIndex = (page-1)*pageSize;
+        this.endIndex=((beginIndex+pageSize-1)<=rowCount)?(beginIndex+pageSize-1):(rowCount-1);
+    }
 }
