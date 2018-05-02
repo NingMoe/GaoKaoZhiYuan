@@ -36,14 +36,15 @@
 
     </bean>
 
-    <bean id="websocket" class="com.Gaokao.controller.WebSocketTest"   ></bean>
+    <bean id="websocket" class="com.gaokao.controller.WebSocketTest"   ></bean>
+
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
           p:dataSource-ref="dataSource"
-          p:mapperLocations="classpath:com/Gaokao/dao/UserBaseInfoMapper.xml"
+          p:mapperLocations="classpath:mapping/*.xml"
     />
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-          p:basePackage ="com/Gaokao/dao"
+          p:basePackage ="com.gaokao.dao"
           p:sqlSessionFactoryBeanName="sqlSessionFactory"
     >
     </bean>
@@ -56,6 +57,6 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <context:component-scan base-package="com.Gaokao.service" />
+    <context:component-scan base-package="com.gaokao" />
 
 </beans>
