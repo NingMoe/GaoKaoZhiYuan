@@ -3,6 +3,7 @@ package com.Gaokao.service;
 import com.Gaokao.entity.UserBaseInfo;
 
 public interface UserInfoService {
+    //判断用户是否合法
     public UserBaseInfo isUserLegal(UserBaseInfo userBaseInfo);
     public UserBaseInfo getUserById(int id);
     public UserBaseInfo getUserByName(String loginName);

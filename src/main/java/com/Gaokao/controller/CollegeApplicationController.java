@@ -27,8 +27,9 @@ public class CollegeApplicationController {
         UserBaseInfo user = (UserBaseInfo) session.getAttribute("user");
         String msg = "";
         boolean flag = collegeApplicationService.addApplication(zsid,user.getId());
-        if(flag)
-         msg = "success";
+        if(flag) {
+            msg = "success";
+        }
         return msg;
     }
     @RequestMapping("/deleteApplication")
@@ -37,8 +38,9 @@ public class CollegeApplicationController {
         UserBaseInfo user = (UserBaseInfo) session.getAttribute("user");
         String msg = "";
         boolean flag = collegeApplicationService.deleteApplication(zsid,user.getId());
-        if(flag)
+        if(flag) {
             msg = "success";
+        }
         return msg;
     }
     //判断该用户已选择哪些志愿
@@ -47,13 +49,13 @@ public class CollegeApplicationController {
     public String getApplicatonByUid(HttpSession session){
         UserBaseInfo user = (UserBaseInfo) session.getAttribute("user");
         List<CollegeApplicationInfo> appList = collegeApplicationService.getApplicationByUid(user.getId());
-        String appStr = "";
+        StringBuilder appStr = new StringBuilder();
         if(appList!=null){
             for(CollegeApplicationInfo collegeApplicationInfo:appList){
-                appStr = appStr+collegeApplicationInfo.getZsid()+",";
+                appStr = appStr.append(collegeApplicationInfo.getZsid()).append(",");
             }
         }
-        return appStr;
+        return appStr.toString();
     }
     @RequestMapping("/getApplicationAllByUid")
     @ResponseBody
@@ -83,8 +85,9 @@ public class CollegeApplicationController {
         UserBaseInfo user = (UserBaseInfo) session.getAttribute("user");
         String msg = "";
         boolean flag = collegeApplicationService.updateApplicationRank(code,zsid,user.getId());
-        if(flag)
+        if(flag) {
             msg = "success";
+        }
         return msg;
     }
 }

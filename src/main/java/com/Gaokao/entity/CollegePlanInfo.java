@@ -14,6 +14,7 @@ public class CollegePlanInfo {
     private String xkkm2;
     private String xkkm3;
     private int pc;
+    private int totalRecord;
 
 
     public CollegePlanInfo() {
@@ -97,5 +98,13 @@ public class CollegePlanInfo {
 
     public void setSf(String sf) {
         this.sf = sf;
+    }
+
+    public int getTotalRecord() {
+        return totalRecord;
+    }
+
+    public void setTotalRecord(int totalRecord) {
+        this.totalRecord = totalRecord;
     }
 }

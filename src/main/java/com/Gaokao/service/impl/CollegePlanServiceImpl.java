@@ -5,6 +5,7 @@ import com.Gaokao.dao.CollegePlanMapper;
 import com.Gaokao.entity.CollegePlanInfo;
 import com.Gaokao.entity.ExamScoreInfo;
 import com.Gaokao.service.CollegePlanService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,15 +23,17 @@ public class CollegePlanServiceImpl implements CollegePlanService {
     }
 
     @Override
+    @Deprecated
     public List getSuitCollegePlan(List<ExamScoreInfo> scoreList) {
         //选考科目
-        String xkList="";
+        StringBuilder xkListSbu=new StringBuilder();
         List<CollegePlanInfo> planSuitList = new ArrayList<>();
         for(ExamScoreInfo score : scoreList){
             if(score.getSubjectId()>13) {
-                xkList=xkList+score.getSubjectName()+",";
+                xkListSbu=xkListSbu.append(score.getSubjectName()).append(",");
             }
         }
+        String xkList = xkListSbu.toString();
         List<CollegePlanInfo> planList = getAllCollegePlan();
         for(CollegePlanInfo planInfo : planList){
                 String xkkm1 = planInfo.getXkkm1() == null ? "" : planInfo.getXkkm1();
@@ -47,15 +50,18 @@ public class CollegePlanServiceImpl implements CollegePlanService {
     public List getPlanByCollegeName(String collegeName) {
         return collegePlanMapper.getPlanByCollegeName(collegeName);
     }
+
+    @Deprecated
     public List getSuitPlan(List<ExamScoreInfo> scoreList,List<CollegePlanInfo> planList) {
         //选考科目
-        String xkList="";
+        StringBuilder xkListSbu=new StringBuilder();
         List<CollegePlanInfo> planSuitList = new ArrayList<>();
         for(ExamScoreInfo score : scoreList){
             if(score.getSubjectId()>13) {
-                xkList=xkList+score.getSubjectName()+",";
+                xkListSbu=xkListSbu.append(score.getSubjectName()).append(",");
             }
         }
+        String xkList = xkListSbu.toString();
         for(CollegePlanInfo planInfo : planList){
             String xkkm1 = planInfo.getXkkm1() == null ? "" : planInfo.getXkkm1();
             String xkkm2 = planInfo.getXkkm2() == null ? "" : planInfo.getXkkm2();
@@ -67,9 +73,20 @@ public class CollegePlanServiceImpl implements CollegePlanService {
         return planSuitList;
     }
     @Override
-    public List getAllPlan(List scoreList,String collegeName, String type) {
-        List planList = collegePlanMapper.getAllPlan(collegeName,type);
-       List planSuitList = getSuitPlan(scoreList,planList);
+    public List getAllPlan(List<ExamScoreInfo> scoreList,String collegeName, String type,int pageSize,int offset) {
+       // List planList = collegePlanMapper.getAllPlan(collegeName,type);
+       //List planSuitList = getSuitPlan(scoreList,planList);
+        List<String> subject=new ArrayList();
+        for(ExamScoreInfo score : scoreList){
+            if(score.getSubjectId()>13) {
+                subject.add(score.getSubjectName());
+            }
+        }
+        String xkkm1 = StringUtils.isNotEmpty(subject.get(0))?subject.get(0):"";
+        String xkkm2 = StringUtils.isNotEmpty(subject.get(1))?subject.get(1):"";
+        String xkkm3 = StringUtils.isNotEmpty(subject.get(2))?subject.get(2):"";
+        String bxkm = "不限";
+        List planSuitList = collegePlanMapper.getAllSuitPlan(xkkm1,xkkm2,xkkm3,bxkm,collegeName,type,pageSize,offset);
        return planSuitList;
     }
 }

@@ -25,7 +25,7 @@ public class MajorController {
      public Page selectAllMajor(@RequestParam(value="pageNum", defaultValue="1")int pageNum,
                                 @RequestParam(value="name", defaultValue="")String majorName,
                                 @RequestParam(value="data", defaultValue="")String data){
-         List majorInfoList=new ArrayList();
+         List majorInfoList;
         Page pageInfo = new Page();
         
             if (majorName.equals("")) {

@@ -9,6 +9,7 @@
         <result property="collegeId" column="college_id" />
         <result property="collegeName" column="college_name" />
         <result property="sf" column="sf" />
+        <result property="totalRecord" column="total" />
         <result property="majorId" column="major_id" />
         <result property="majorName" column="major_name" />
         <result property="xkkm1" column="college_cc" />
@@ -43,5 +44,26 @@
         and cr.type=#{1}
         order by cr.rank
         </if>
+    </select>
+    <select id="getAllSuitPlan"  resultMap="collegePlanResultMap" parameterType="Map">
+        select COUNT(1) OVER() AS total, c1.*,c2.college_name,c2.sf from college_zsjh c1,college c2,college_rank cr
+        where c1.college_id =c2.college_id and cr.college_id=c2.college_id
+        and c1.zs_id in
+        (
+        SELECT zs_id from college_choose_subject
+        where zs_id NOT in
+        (
+        SELECT zs_id from college_choose_subject
+        where xkkm not in (#{xkkm1},#{xkkm2},#{xkkm3},#{bxkm})
+        )
+        )
+        <if test='collegeName!=""'>
+            and    c2.college_name like #{collegeName}
+        </if>
+        <if test='type!=""'>
+            and cr.type=#{type}
+            order by cr.rank
+        </if>
+        LIMIT #{pageSize} OFFSET #{offset}
     </select>
 </mapper>

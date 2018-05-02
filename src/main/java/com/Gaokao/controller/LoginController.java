@@ -23,12 +23,12 @@ public class LoginController {
     private CollegeInfoService collegeInfoService;
 
     @RequestMapping("/index")
-    public String UserIndex(){
+    public String userIndex(){
         return "userLogin";
     }
 
     @RequestMapping("/userlogin")
-    public String UserLogin(UserBaseInfo userBaseInfo, Model model,HttpSession httpSession){
+    public String userLogin(UserBaseInfo userBaseInfo, Model model,HttpSession httpSession){
         UserBaseInfo user = uService.isUserLegal(userBaseInfo);
 
         if(user!=null){

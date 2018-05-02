@@ -4,6 +4,7 @@ import com.Gaokao.entity.CollegeInfo;
 import com.Gaokao.entity.Page;
 import com.Gaokao.service.CollegeInfoService;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +32,7 @@ public class CollegeController {
         JSONObject jsonObject = JSONObject.fromObject(data);
 
         if (jsonObject.isEmpty()) {
-            if (collegeName.equals("")) {
+            if (StringUtils.isBlank(collegeName)) {
                 collegeInfoList = collegeInfoService.getAllCollege();
 
             } else {
@@ -43,7 +44,7 @@ public class CollegeController {
             String ids =  jsonObject.get("ids")==null?"":(String)jsonObject.get("ids");
             //对比查询
             //删除末尾","
-            if (ids.substring(ids.length() - 1, ids.length()) == ",") {
+            if (ids.endsWith(",")) {
                 ids = ids.substring(0, ids.length() - 1);
             }
             String[] b = ids.split(",");
