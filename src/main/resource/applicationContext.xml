@@ -36,7 +36,7 @@
 
     </bean>
 
-
+    <bean id="websocket" class="com.Gaokao.controller.WebSocketTest"   ></bean>
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
           p:dataSource-ref="dataSource"
           p:mapperLocations="classpath:com/Gaokao/dao/UserBaseInfoMapper.xml"

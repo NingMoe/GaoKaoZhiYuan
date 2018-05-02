@@ -1,5 +1,8 @@
 package com.Gaokao.entity;
 
+/**
+ * 专业实体类
+ */
 public class MajorInfo {
     private String id;
     private String name;

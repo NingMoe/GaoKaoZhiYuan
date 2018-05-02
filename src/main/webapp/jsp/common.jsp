@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <head>
@@ -9,6 +10,7 @@
         <link type="text/css" href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link type="text/css" href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="../css/theme.css" rel="stylesheet">
+        <link type="text/css" href="../css/page.css" rel="stylesheet">
         <link type="text/css" href="../images/icons/css/font-awesome.css" rel="stylesheet">
         <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
               rel='stylesheet'>
@@ -19,6 +21,7 @@
         <div class="container">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
                 <i class="icon-reorder shaded"></i></a><a class="brand" >${user.realName}</a>
+            <span id="userInfoId" style="display: none">${user.id}</span>
             <div class="nav-collapse collapse navbar-inverse-collapse">
                 <ul class="nav nav-icons">
                     <li class="active"><a href="#"><i class="icon-envelope"></i></a></li>
@@ -36,7 +39,7 @@
                         <img src="../images/user.png" class="nav-avatar" />
                         <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="${pageContext.request.contextPath}/jsp/userBaseInfo.jsp">个人基本信息</a></li>
+                            <li><a id="userInfo" >个人基本信息</a></li>
                             <li><a href="${pageContext.request.contextPath}/jsp/changeInfo.jsp">修改账号密码</a></li>
                             <li class="divider"></li>
                             <li><a href="#">注销</a></li>
@@ -51,33 +54,119 @@
 </div>
 <!-- /navbar -->
 <div class="wrapper">
-    <div class="container">
+    <div class="container" style="width: 1570px">
         <div class="row">
             <div class="span3">
                 <div class="sidebar">
                     <ul class="widget widget-menu unstyled">
-                        <li class="active"><a href="${pageContext.request.contextPath}/college/selectAllCollege.do"><i class="menu-icon icon-dashboard"></i>查询高校信息
+                        <li class="active"><a id="collegeAll"><i class="menu-icon icon-dashboard"></i>查询高校信息
                         </a></li>
-                        <li><a href="${pageContext.request.contextPath}/major/selectAllMajor.do"><i class="menu-icon icon-bullhorn"></i>查询专业信息</a>
+                        <li><a id="majorAll"><i class="menu-icon icon-bullhorn"></i>查询专业信息</a>
                         </li>
                     </ul>
 
                     <ul class="widget widget-menu unstyled">
+                        <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 政策解读 </a></li>
+                        <li><a id="talkOnline"><i class="menu-icon icon-bold"></i> 在线咨询 </a></li>
                         <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 查询往年一分一段表 </a></li>
                         <li><a href="ui-typography.html"><i class="menu-icon icon-book"></i>查询往年高校招生计划 </a></li>
-                        <li><a href="ui-typography.html"><i class="menu-icon icon-book"></i>填报志愿 </a></li>
+                        <li><a id="planAll"><i class="menu-icon icon-book"></i>填报志愿 </a></li>
+                        <li><a id="applicationAll"><i class="menu-icon icon-bold"></i> 查看志愿 </a></li>
                     </ul>
-
                 </div>
                 <!--/.sidebar-->
             </div>
+            <!--/.span3-->
+            <div class="span9" style="width: 1270px">
+                <div class="content">
+                    <div class="btn-controls">
+                    </div>
+                    <form class="navbar-search pull-left input-append" action="#" style="float: right;">
+                        <div class="form-group" style="float:  left;">
+                            <%--<label for="rankSelect" class="col-sm-3 control-label" style="float:  left;">排名</label>--%>
+                            <div class="col-sm-9">
+                                <select class="selectpicker" id="rankSelect" name="rankSelect"
+                                        data-width="100%" style="width:  100px;margin-right:  50px">
+                                    <optgroup label="类别">
+                                        <option>综合</option>
+                                        <option>法学</option>
+                                        <option>工学</option>
+                                        <option>管理学</option>
+                                        <option>教育学</option>
+                                        <option>经济学</option>
+                                        <option>理学</option>
+                                        <option>历史学</option>
+                                        <option>农学</option>
+                                        <option>文学</option>
+                                        <option>医学</option>
+                                        <option>哲学</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <input style="height: 30px;" type="text" class="span3" id="searchInput" placeholder="高校名查询">
+                        <button class="btn" type="button" id="searchBtn">
+                            <i class="icon-search"></i>
+                        </button>
+                        <button class="btn" style="margin-left: 10px;" type="button" id="compareBtn">
+                            高校对比
+                        </button>
+                        <button class="btn" style="margin-left: 10px;" type="button" id="homeBtn">
+                            回到首页
+                        </button>
+                    </form>
+                        <div id="talkdiv" style="display: none">
+                            Welcome<br/><textarea id="text" type="text"></textarea>
+                            <button onclick="send()">发送消息</button>
+                            <hr/>
+                            <button onclick="closeWebSocket()">关闭WebSocket连接</button>
+                            <hr/>
+                            <p id = "pid">${user.realName}</p>
+                            <div id="message" style="width: 500px;;height:500px; overflow:auto;"></div>
+                        </div>
+                        <div class="module">
+                            <div class="module-head" id="table_head">
+                            </div>
+                            <div class="module-body table">
+                                <table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display"
+                                       width="100%" style="table-layout:  fixed;">
+                                    <thead>
+
+                                    </thead>
+
+                                    <tbody>
+
+                                    </tbody>
+                                    <tfoot>
+                                    </tfoot>
+                                </table>
+                                <div id="pageCount"></div>
+                            </div>
+                        </div>
+                        <!--/.module-->
+                    </div>
+                    <!--/.content-->
+                </div>
+                <!--/.span9-->
+            </div>
+        </div>
+        <!--/.container-->
+    </div>
+    <!--/.wrapper-->
+    <div class="footer">
+    </div>
 
     <script src="../scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
     <script src="../scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
     <script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="../scripts/flot/jquery.flot.js" type="text/javascript"></script>
     <script src="../scripts/flot/jquery.flot.resize.js" type="text/javascript"></script>
+    <script src="../scripts/js/common.js" type="text/javascript"></script>
+    <script src="../scripts/js/userInfo.js" type="text/javascript"></script>
+    <script src="../scripts/js/college.js" type="text/javascript"></script>
+    <script src="../scripts/js/major.js" type="text/javascript"></script>
+    <script src="../scripts/js/collegePlan.js" type="text/javascript"></script>
+    <script src="../scripts/js/collegeAppliaction.js" type="text/javascript"></script>
+<script src="../scripts/js/talk.js" type="text/javascript"></script>
     <script src="../scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
-    <script src="../scripts/common.js" type="text/javascript"></script>
-
 </body>
