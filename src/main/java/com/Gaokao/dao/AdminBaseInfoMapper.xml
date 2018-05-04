@@ -1,0 +1,29 @@
+<?xml version ="1.0"encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Gaokao.dao.AdminBaseInfoMapper">
+
+    <resultMap type="com.Gaokao.entity.AdminBaseInfo" id="adminResultMap">
+        <id property="id" column="admin_id" />
+        <result property="loginName" column="admin_name" />
+    </resultMap>
+    <select id="getAdminByName"  resultMap="adminResultMap">
+        select * from admin_base_info where admin_name=#{loginName}
+    </select>
+    <select id="getAdminById"  resultMap="adminResultMap">
+        select * from admin_base_info where admin_id=#{id}
+    </select>
+    <insert id="addAdmin"  parameterType="com.Gaokao.entity.AdminBaseInfo">
+	insert into admin_base_info(admin_name,passwd)
+	values(#{loginName},#{passwd})
+    </insert>
+    <update id="updateAdminInfo" parameterType="com.Gaokao.entity.AdminBaseInfo">
+    update
+    admin_base_info
+    set login_name=#{loginName},passwd=#{passwd}
+    where
+    admin_id=#{id}
+</update>
+
+</mapper>
