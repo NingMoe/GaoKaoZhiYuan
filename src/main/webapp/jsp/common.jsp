@@ -54,7 +54,7 @@
 </div>
 <!-- /navbar -->
 <div class="wrapper">
-    <div class="container" style="width: 1570px">
+    <div class="container" style="width: 1770px">
         <div class="row">
             <div class="span3">
                 <div class="sidebar">
@@ -77,7 +77,7 @@
                 <!--/.sidebar-->
             </div>
             <!--/.span3-->
-            <div class="span9" style="width: 1270px">
+            <div class="span9" style="width: 1470px">
                 <div class="content">
                     <div class="btn-controls">
                     </div>
@@ -102,8 +102,16 @@
                                         <option>哲学</option>
                                     </optgroup>
                                 </select>
+                                <select class="selectpicker" id="priorSelect" name="rankSelect"
+                                        data-width="100%" style="width:  100px;margin-right:  50px">
+                                    <optgroup label="类别">
+                                        <option>专业优先</option>
+                                        <option>院校优先</option>
+                                    </optgroup>
+                                </select>
                             </div>
                         </div>
+                        <input style="height: 30px;" type="text" class="span3" id="searchMajorInput" placeholder="专业名查询">
                         <input style="height: 30px;" type="text" class="span3" id="searchInput" placeholder="高校名查询">
                         <button class="btn" type="button" id="searchBtn">
                             <i class="icon-search"></i>

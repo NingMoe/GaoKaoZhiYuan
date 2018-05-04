@@ -1,6 +1,7 @@
 package com.Gaokao.controller;
 
 import com.Gaokao.entity.CollegePlanInfo;
+import com.Gaokao.entity.ExamScoreInfo;
 import com.Gaokao.entity.Page;
 import com.Gaokao.entity.UserBaseInfo;
 import com.Gaokao.service.CollegePlanService;
@@ -29,22 +30,33 @@ public class CollegePlanController {
                                  @RequestParam(value="name", defaultValue="")String collegeName,
                                  @RequestParam(value="data", defaultValue="")String data,
                                  HttpSession session){
-            String ids="";
-            String type="";
+        //json解析
             JSONObject jsonObject = JSONObject.fromObject(data);
-            type =  jsonObject.get("type")==null?"综合":(String)jsonObject.get("type");
-            ids =  jsonObject.get("ids")==null?"":(String)jsonObject.get("ids");
+        String type =  jsonObject.get("type")==null?"综合":(String)jsonObject.get("type");
+        String priorStr =  jsonObject.get("prior")==null?"专业优先":(String)jsonObject.get("prior");
+        String majorName =  jsonObject.get("majorName")==null?"":(String)jsonObject.get("majorName");
+        int prior = 0;
+         if(priorStr.equals("院校优先")){
+             prior = 1;
+         }
         UserBaseInfo user = (UserBaseInfo) session.getAttribute("user");
         List<CollegePlanInfo> planInfoList;
         collegeName = '%'+collegeName+'%';
+        majorName = '%'+majorName+'%';
         Page pageInfo = new Page();
         int startIndex = (pageNum-1)*pageInfo.getPageSize();
-        //数据库分页
-        planInfoList = collegePlanService.getAllPlan(user.getScoreList(),collegeName,type,pageInfo.getPageSize(),startIndex);
+        int totalScore=0;
+        for(ExamScoreInfo scoreItem :  user.getScoreList()){
+            totalScore = totalScore+scoreItem.getScore();
+        }
+        //数据库分页查询招生计划
+        planInfoList = collegePlanService.getAllPlan(user.getScoreList(),collegeName,type,pageInfo.getPageSize(),startIndex,totalScore,majorName,prior);
 
         int total = 0;
         if(planInfoList!=null){
-            total = planInfoList.get(0).getTotalRecord();
+            if(!planInfoList.isEmpty()) {
+                total = planInfoList.get(0).getTotalRecord();
+            }
         }
 
         pageInfo.setRow(planInfoList,pageNum,total);

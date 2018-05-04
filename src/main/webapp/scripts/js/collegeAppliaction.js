@@ -42,8 +42,9 @@ $(document).ready(function () {
                 "<td>" + ((data[i].sf!=null)?data[i].sf:"") + "</td>" +
                 "<td>"+((data[i].majorId!=null)?data[i].majorId:"") +"</td>" +
                 "<td>" + ((data[i].majorName!=null)?data[i].majorName:"") + "</td>" ;
-           str = str+"<td><button  class='deleteApplication' name='" + data[i].zsid + "'style='width: 52px'>-删除志愿</button>" +
-               "<button class='moveup'name='" + data[i].zsid + "'>上移</button> <button class='movedown'name='" + data[i].zsid + "'>下移</button></td>" ;
+           str = str+"<td><button  class='deleteApplication licy-btn licy-btn-primary'style='border-color:#bd362f;background-color: #bd362f' name='" + data[i].zsid + "'style='width: 52px'>-删除志愿</button>" +
+               "<button class='moveup licy-btn licy-btn-primary'style='border-color:#2192a8;background-color: #2192a8' name='" + data[i].zsid + "'>上移</button> " +
+               "<button class='movedown licy-btn licy-btn-primary'style='border-color:#2192a8;background-color: #2192a8' name='" + data[i].zsid + "'>下移</button></td>" ;
             str = str + "</tr>";
         }
         $("tbody").html(str);

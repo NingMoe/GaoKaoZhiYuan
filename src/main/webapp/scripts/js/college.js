@@ -5,6 +5,7 @@ $(document).ready(function () {
     var flag = false;
     var temp = {};
     $('#collegeAll').click(function(){
+        $("#searchMajorInput").hide();
         $("#talkdiv").hide();
         $(".module").show();
         $(".navbar-search.pull-left.input-append").show();
@@ -92,7 +93,9 @@ $(document).ready(function () {
     $(document).on('click','#homeBtn',function () {
         flag = false;
         $("#searchInput").val("");
+        $("#searchMajorInput").val("");
         $("#rankSelect").val("排名");
+        $("#priorSelect").val("专业优先");
         getData(url,1,"",temp);
 
     })
@@ -114,11 +117,23 @@ $(document).ready(function () {
             }
         }
     })
-    //异步模糊查询
+    //高校名异步模糊查询
     $(document).on('keyup','#searchInput',function () {
         flag = false;
         var sInput = $("#searchInput").val();
         if(sInput!=""){
+            //第一次异步like请求
+            getData(url,1,sInput,item);
+        }
+
+    })
+    //专业名异步模糊查询
+    $(document).on('keyup','#searchMajorInput',function () {
+        flag = false;
+        var majorName = $("#searchMajorInput").val();
+        item.majorName = majorName;
+        var sInput = $("#searchInput").val();
+        if(majorName!=""){
             //第一次异步like请求
             getData(url,1,sInput,item);
         }

@@ -14,6 +14,16 @@ public class CollegePlanInfo {
     private String xkkm2;
     private String xkkm3;
     private int pc;
+    //计划招生人数
+    private int jhzsrs;
+    //分数线
+    private int scoreLine;
+    //位次
+    private int num;
+    //分差
+    private int poor;
+    //位次差
+    private int dislocation;
     private int totalRecord;
 
 
@@ -98,6 +108,46 @@ public class CollegePlanInfo {
 
     public void setSf(String sf) {
         this.sf = sf;
+    }
+
+    public int getJhzsrs() {
+        return jhzsrs;
+    }
+
+    public void setJhzsrs(int jhzsrs) {
+        this.jhzsrs = jhzsrs;
+    }
+
+    public int getScoreLine() {
+        return scoreLine;
+    }
+
+    public void setScoreLine(int scoreLine) {
+        this.scoreLine = scoreLine;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public int getPoor() {
+        return poor;
+    }
+
+    public void setPoor(int poor) {
+        this.poor = poor;
+    }
+
+    public int getDislocation() {
+        return dislocation;
+    }
+
+    public void setDislocation(int dislocation) {
+        this.dislocation = dislocation;
     }
 
     public int getTotalRecord() {

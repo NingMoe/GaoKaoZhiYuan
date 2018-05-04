@@ -10,6 +10,8 @@ $(document).ready(function () {
         $(".navbar-search.pull-left.input-append").show();
         //清空查询框
         $("#searchInput").val("");
+        $("#searchMajorInput").show();
+        $("#searchMajorInput").val("");
          url = planUrl;
          currentPage=1;
          collegeName="";
@@ -35,6 +37,11 @@ $(document).ready(function () {
             "<th style=\"\n" + " text-align:center;\n" + "\""+">选考科目1</th>" +
             "<th style=\"\n" + " text-align:center;\n" + "\""+">选考科目2</th>" +
             "<th style=\"\n" + " text-align:center;\n" + "\""+">选考科目3</th>" +
+            "<th style=\"\n" + " text-align:center;\n" + "\""+">计划招生人数</th>" +
+            "<th style=\"\n" + " text-align:center;\n" + "\""+">分数线</th>" +
+            "<th style=\"\n" + " text-align:center;\n" + "\""+">位次</th>" +
+            "<th style=\"\n" + " text-align:center;\n" + "\""+">位次差</th>" +
+            "<th style=\"\n" + " text-align:center;\n" + "\""+">录取概率</th>" +
             "<th style=\"\n" + " text-align:center;\n" + "\""+">操作</th>" +
             "</tr>");
         var data = page.row;
@@ -48,14 +55,30 @@ $(document).ready(function () {
                 "<td>" + ((data[i].collegeName!=null)?data[i].collegeName:"")+ "</td>" +
                 "<td>" + ((data[i].sf!=null)?data[i].sf:"") + "</td>" +
                 "<td>"+((data[i].majorId!=null)?data[i].majorId:"") +"</td>" +
-                "<td>" + ((data[i].majorName!=null)?data[i].majorName:"") + "</td>" +
+                "<td class='majorTd'>" + ((data[i].majorName!=null)?data[i].majorName:"") + "</td>" +
                 "<td>" + ((data[i].xkkm1!=null)?data[i].xkkm1:"") + "</td>" +
                 "<td>" + ((data[i].xkkm2!=null)?data[i].xkkm2:"") + "</td>" +
-                "<td>" + ((data[i].xkkm3!=null)?data[i].xkkm3:"") + "</td>" ;
+                "<td>" + ((data[i].xkkm3!=null)?data[i].xkkm3:"") + "</td>"+
+                "<td>" + ((data[i].jhzsrs!=null)?data[i].jhzsrs:"") + "</td>" +
+                "<td>" + ((data[i].scoreLine!=null)?data[i].scoreLine:"") + "</td>" +
+                "<td>" + ((data[i].num!=null)?data[i].num:"") + "</td>" +
+                "<td>" + ((data[i].poor!=null)?data[i].dislocation:"") + "</td>" ;
+            if(data[i].dislocation<=-5000){
+                str = str+"<td><button class='licy-btn licy-btn-primary ' disabled='true' style='border-color:#78ba00;background-color: #78ba00' name='" + data[i].zsId + "'>推荐</button></td>" ;
+            }
+            else if(data[i].dislocation<=5000){
+                str = str+"<td><button class='licy-btn licy-btn-primary ' disabled='true' style='border-color:#2192a8;background-color: #2192a8' name='" + data[i].zsId + "'>比较推荐</button></td>" ;
+            }
+            else if(data[i].dislocation<10000){
+                str = str+"<td><button class='licy-btn licy-btn-primary ' disabled='true' style='border-color:#df8505;background-color: #df8505' name='" + data[i].zsId + "'>可以冲</button></td>" ;
+            }
+            else {
+                str = str+"<td><button class='licy-btn licy-btn-primary ' disabled='true' style='border-color:#bd362f;background-color: #bd362f' name='" + data[i].zsId + "'>不推荐</button></td>" ;
+            }
              if(!compareArray(data[i].zsId)) {
-                 str = str+"<td><button  class='addApplication' name='" + data[i].zsId + "'>+添加志愿</button></td>" ;
+                 str = str+"<td><button  class='addApplication licy-btn licy-btn-primary'style='border-color:#2192a8;background-color: #2192a8' name='" + data[i].zsId + "'>+添加志愿</button></td>" ;
              }
-             else str = str+"<td><button  class='addApplication' name='" + data[i].zsId + "'>-删除志愿</button></td>" ;
+             else str = str+"<td><button  class='addApplication licy-btn licy-btn-primary'style='border-color:#bd362f;background-color: #bd362f' name='" + data[i].zsId + "'>-删除志愿</button></td>" ;
             str = str + "</tr>";
         }
         $("tbody").html(str);
@@ -75,9 +98,22 @@ $(document).ready(function () {
         var type = $(this).val();
         item.type = type;
         collegeName = $("#searchInput").val();
+        var prior = $("#priorSelect").val();
+        item.prior = prior;
+        majorName = $("#searchMajorInput").val();
+        item.majorName = majorName;
         getData(url,currentPage,collegeName,item);
     })
-
+    $(document).on('change','#priorSelect',function () {
+        var type = $("#rankSelect").val();
+        item.type = type;
+        collegeName = $("#searchInput").val();
+        var prior = $(this).val();
+        item.prior = prior;
+        majorName = $("#searchMajorInput").val();
+        item.majorName = majorName;
+        getData(url,currentPage,collegeName,item);
+    })
     addApplication = function (id,obj) {
         $.ajax({
             url:addAppUrl,//请求地址
@@ -88,6 +124,9 @@ $(document).ready(function () {
             success : function(data) {
                 if(data=="success"){
                     obj.html("-删除志愿");
+                    //改变按钮颜色
+                    obj.css("border-color",'#bd362f');
+                    obj.css("background-color",'#bd362f');
                 }
             },
             error:function(data){
@@ -133,6 +172,8 @@ $(document).ready(function () {
             success : function(data) {
               if(data=="success"){
                   obj.html("+添加志愿");
+                  obj.css("border-color",'#2192a8');
+                  obj.css("background-color",'#2192a8');
               }
             },
             error:function(data){

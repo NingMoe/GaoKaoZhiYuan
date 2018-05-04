@@ -73,7 +73,7 @@ public class CollegePlanServiceImpl implements CollegePlanService {
         return planSuitList;
     }
     @Override
-    public List getAllPlan(List<ExamScoreInfo> scoreList,String collegeName, String type,int pageSize,int offset) {
+    public List getAllPlan(List<ExamScoreInfo> scoreList,String collegeName, String type,int pageSize,int offset,int totalScore,String majorName,int prior) {
        // List planList = collegePlanMapper.getAllPlan(collegeName,type);
        //List planSuitList = getSuitPlan(scoreList,planList);
         List<String> subject=new ArrayList();
@@ -86,7 +86,7 @@ public class CollegePlanServiceImpl implements CollegePlanService {
         String xkkm2 = StringUtils.isNotEmpty(subject.get(1))?subject.get(1):"";
         String xkkm3 = StringUtils.isNotEmpty(subject.get(2))?subject.get(2):"";
         String bxkm = "不限";
-        List planSuitList = collegePlanMapper.getAllSuitPlan(xkkm1,xkkm2,xkkm3,bxkm,collegeName,type,pageSize,offset);
+        List planSuitList = collegePlanMapper.getAllSuitPlan(xkkm1,xkkm2,xkkm3,bxkm,collegeName,type,pageSize,offset,totalScore,majorName,prior);
        return planSuitList;
     }
 }
