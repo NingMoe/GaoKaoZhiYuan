@@ -16,6 +16,10 @@ public class RegisterController {
     @Autowired
     private UserInfoService uService;
 
+    @RequestMapping("/index")
+    public  String registerIndex(){
+        return "register";
+    }
     @RequestMapping("/userRegister")
     public String userRegister(UserBaseInfo userBaseInfo, HttpServletRequest request, Model model){
         UserBaseInfo user = uService.isUserLegal(userBaseInfo);

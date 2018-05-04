@@ -18,6 +18,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     private ExamScoreInfoMapper examScoreInfoMapper;
 
+    @Override
     public UserBaseInfo isUserLegal(UserBaseInfo userBaseInfo){
        UserBaseInfo userInfo = userBaseInfoMapper.getUserByName(userBaseInfo.getLoginName());
        if(userInfo!=null){

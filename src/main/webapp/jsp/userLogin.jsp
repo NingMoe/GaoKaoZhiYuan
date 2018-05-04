@@ -34,10 +34,12 @@
 
                 <ul class="nav pull-right">
 
-                    <li><a href="register.jsp">
+                    <li><a href="../register/index.do">
                         Sign Up
                     </a></li>
-
+                    <li><a href="../login/adminIndex.do">
+                        Admin
+                    </a></li>
 
 
                     <li><a href="#">
@@ -55,7 +57,7 @@
     <div class="container">
         <div class="row">
             <div class="module module-login span4 offset4">
-                <form class="form-vertical" action="/ga/login/userlogin.do" method="post" >
+                <form class="form-vertical" action="../login/userlogin.do" method="post" >
                     <div class="module-head">
                         <h3>Sign In</h3>
                     </div>

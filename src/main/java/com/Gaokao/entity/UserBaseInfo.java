@@ -14,7 +14,7 @@ public class UserBaseInfo implements Serializable {
     private String address;
     private String phone;
     private String sex;
-    private List scoreList;
+    private List<ExamScoreInfo> scoreList;
 
     public UserBaseInfo() {
     }
@@ -76,7 +76,7 @@ public class UserBaseInfo implements Serializable {
         this.sex = sex;
     }
 
-    public List getScoreList() {
+    public List<ExamScoreInfo> getScoreList() {
         return scoreList;
     }
 

@@ -27,6 +27,7 @@ public interface CollegePlanMapper {
      */
     public List getAllSuitPlan(@Param("xkkm1") String xkkm1,@Param("xkkm2") String xkkm2,@Param("xkkm3") String xkkm3,
                                @Param("bxkm") String bxkm,@Param("collegeName") String collegeName,@Param("type") String type,
-                               @Param("pageSize") int pageSize,@Param("offset") int offset);
+                               @Param("pageSize") int pageSize,@Param("offset") int offset,@Param("totalScore") int totalScore,
+                               @Param("majorName") String majorName,@Param("prior") int prior);
     public CollegePlanInfo getPlanById(int zsid);
 }
