@@ -66,9 +66,10 @@
                     </ul>
 
                     <ul class="widget widget-menu unstyled">
-                        <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 高校招生计划管理 </a></li>
-                        <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 高校排名管理 </a></li>
-                        <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 考生信息管理 </a></li>
+                        <li><a id="planAll"><i class="menu-icon icon-bold"></i> 高校招生计划管理 </a></li>
+                        <li><a id="rankAll"><i class="menu-icon icon-bold"></i> 高校排名管理 </a></li>
+                        <li><a id="policyAll"><i class="menu-icon icon-bold"></i> 政策信息管理 </a></li>
+                        <li><a id="userAll"><i class="menu-icon icon-bold"></i> 用户信息管理 </a></li>
                     </ul>
                 </div>
                 <!--/.sidebar-->
@@ -108,6 +109,9 @@
                         <button class="btn" style="margin-left: 10px;" type="button" id="compareBtn">
                             高校对比
                         </button>
+                        <button class="btn" style="margin-left: 10px;" type="button" id="addBtn">
+                            新增
+                        </button>
                         <button class="btn" style="margin-left: 10px;" type="button" id="homeBtn">
                             回到首页
                         </button>
@@ -120,6 +124,20 @@
                         <hr/>
                         <p id = "pid">${user.realName}</p>
                         <div id="message" style="width: 500px;;height:500px; overflow:auto;"></div>
+                    </div>
+                    <div>
+                        <form id="addForm" action="#" method="post" style="display: none">
+                            <table id = "addTable"  cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display"
+                                   width="100%" style="table-layout:  fixed;">
+
+                            </table>
+                        </form>
+                        <form id="updateForm" action="#" method="post" style="display: none">
+                            <table id = "updateTable"  cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display"
+                                   width="100%" style="table-layout:  fixed;">
+
+                            </table>
+                        </form>
                     </div>
                     <div class="module">
                         <div class="module-head" id="table_head">
@@ -137,6 +155,7 @@
                                 <tfoot>
                                 </tfoot>
                             </table>
+
                             <div id="pageCount"></div>
                         </div>
                     </div>
@@ -158,12 +177,10 @@
 <script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="../scripts/flot/jquery.flot.js" type="text/javascript"></script>
 <script src="../scripts/flot/jquery.flot.resize.js" type="text/javascript"></script>
-<script src="../scripts/js/common.js" type="text/javascript"></script>
-<script src="../scripts/js/userInfo.js" type="text/javascript"></script>
-<script src="../scripts/js/college.js" type="text/javascript"></script>
-<script src="../scripts/js/major.js" type="text/javascript"></script>
-<script src="../scripts/js/collegePlan.js" type="text/javascript"></script>
-<script src="../scripts/js/collegeAppliaction.js" type="text/javascript"></script>
-<script src="../scripts/js/talk.js" type="text/javascript"></script>
+<script src="../scripts/js/admin/common_admin.js" type="text/javascript"></script>
+<script src="../scripts/js/admin/userShow.js" type="text/javascript"></script>
+<script src="../scripts/js/admin/college.js" type="text/javascript"></script>
+<script src="../scripts/js/admin/major.js" type="text/javascript"></script>
+<script src="../scripts/js/admin/collegePlan.js" type="text/javascript"></script>
 <script src="../scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
 </body>

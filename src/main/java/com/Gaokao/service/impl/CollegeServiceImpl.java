@@ -28,4 +28,18 @@ public class CollegeServiceImpl implements CollegeInfoService {
     public CollegeInfo getAppById(String id) {
         return collegeInfoMapper.getCollegeById(id);
     }
+
+    @Override
+    public void addCollege(CollegeInfo collegeInfo) {
+        CollegeInfo coInfo = collegeInfoMapper.getCollegeById(collegeInfo.getId());
+        if(coInfo==null){
+            collegeInfoMapper.addCollege(collegeInfo);
+
+            }
+    }
+
+    @Override
+    public void deleteCollege(String id) {
+        collegeInfoMapper.deleteCollege(id);
+    }
 }
