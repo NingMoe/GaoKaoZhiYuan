@@ -187,7 +187,7 @@ $(document).ready(function () {
                alert("添加成功");
                $("#addForm").hide();
                 $(".module").show();
-                getData(url,currentPage,username,item);
+                getData(url,currentPage,"",item);
 
             },
             error:function(data){
