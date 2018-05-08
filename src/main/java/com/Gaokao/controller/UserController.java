@@ -79,22 +79,22 @@ public class UserController {
         }
         ExamScoreInfo examMathScoreInfo = new ExamScoreInfo();
         examMathScoreInfo.setSubjectName("数学");
-        examMathScoreInfo.setScore(Integer.valueOf((String) userMap.get("mathScore")));
+        examMathScoreInfo.setScore(Integer.parseInt((String) userMap.get("mathScore")));
         examScoreInfoList.add(examMathScoreInfo);
         ExamScoreInfo examChineseScoreInfo = new ExamScoreInfo();
         examChineseScoreInfo.setSubjectName("语文");
-        examChineseScoreInfo.setScore(Integer.valueOf((String) userMap.get("chineseScore")));
+        examChineseScoreInfo.setScore(Integer.parseInt((String) userMap.get("chineseScore")));
         examScoreInfoList.add(examChineseScoreInfo);
         ExamScoreInfo examEnglishScoreInfo = new ExamScoreInfo();
         examEnglishScoreInfo.setSubjectName("英语");
-        examEnglishScoreInfo.setScore(Integer.valueOf((String) userMap.get("englishScore")));
+        examEnglishScoreInfo.setScore(Integer.parseInt((String) userMap.get("englishScore")));
         examScoreInfoList.add(examEnglishScoreInfo);
         for(int i = 1;i <= 3;i++){
             ExamScoreInfo examScoreXkInfo = new ExamScoreInfo();
             String subName = "rankSelect"+i;
             String score = "xkkmScore"+i;
             examScoreXkInfo.setSubjectName((String) userMap.get(subName));
-            examScoreXkInfo.setScore(Integer.valueOf((String) userMap.get(score)));
+            examScoreXkInfo.setScore(Integer.parseInt((String) userMap.get(score)));
             examScoreInfoList.add(examScoreXkInfo);
         }
         userBaseInfo.setPhone((String) userMap.get("phone"));
