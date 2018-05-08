@@ -99,4 +99,32 @@ public class CollegeController {
         collegeInfoService.deleteCollege(id);
         return "success";
     }
+    @RequestMapping("/getCollegeItem")
+    @ResponseBody
+    public CollegeInfo getCollegeItem(@RequestParam(value="id", defaultValue="1")String id){
+       return  collegeInfoService.getAppById(id);
+    }
+
+    @RequestMapping("/updateCollegeInfo")
+    @ResponseBody
+    public String updateCollegeInfo( @RequestParam(value="data", defaultValue="")String data){
+
+        JSONArray json = JSONArray.fromObject(data);
+        CollegeInfo collegeInfo = new CollegeInfo();
+        Map collegeMap = new HashMap();
+        if(json.size()>0){
+            for(int i=0;i<json.size();i++){
+                // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+                JSONObject job = json.getJSONObject(i);
+                // 得到 每个对象中的属性值
+                collegeMap.put(job.get("name"),job.get("value"));
+            }
+        }
+        collegeInfo.setId(StringUtils.deleteWhitespace((String) collegeMap.get("id")));
+        collegeInfo.setName(StringUtils.deleteWhitespace((String) collegeMap.get("name")));
+        collegeInfo.setSf(StringUtils.deleteWhitespace((String) collegeMap.get("sf")));
+        collegeInfo.setDetail(StringUtils.deleteWhitespace((String) collegeMap.get("detail")));
+        collegeInfoService.updateCollege(collegeInfo);
+        return "success";
+    }
 }

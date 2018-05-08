@@ -67,7 +67,6 @@
 
                     <ul class="widget widget-menu unstyled">
                         <li><a id="planAll"><i class="menu-icon icon-bold"></i> 高校招生计划管理 </a></li>
-                        <li><a id="rankAll"><i class="menu-icon icon-bold"></i> 高校排名管理 </a></li>
                         <li><a id="policyAll"><i class="menu-icon icon-bold"></i> 政策信息管理 </a></li>
                         <li><a id="userAll"><i class="menu-icon icon-bold"></i> 用户信息管理 </a></li>
                     </ul>
@@ -102,6 +101,7 @@
                                 </select>
                             </div>
                         </div>
+                        <input style="height: 30px;" type="text" class="span3" id="searchMajorInput" placeholder="专业名查询">
                         <input style="height: 30px;" type="text" class="span3" id="searchInput" placeholder="高校名查询">
                         <button class="btn" type="button" id="searchBtn">
                             <i class="icon-search"></i>

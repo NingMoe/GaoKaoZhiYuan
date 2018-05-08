@@ -2,6 +2,8 @@ $(document).ready(function () {
     var collegeUrl=genurl+"/college/selectAllCollege.do";
     var addCollegeUrl = genurl+"/college/addCollegeInfo.do";
     var deleteCollegeUrl = genurl+"/college/deleteCollegeInfo.do";
+    var updateCollegeUrl = genurl+"/college/updateCollegeInfo.do";
+    var getCollegeItemUrl = genurl+"/college/getCollegeItem.do";
 //判断是否是对比查询引起的翻页行为
     var flag = false;
     var temp = {};
@@ -15,6 +17,7 @@ $(document).ready(function () {
         $("#searchInput").val("");
          url = collegeUrl;
         addUrl = addCollegeUrl;
+        updateUrl = updateCollegeUrl;
          currentPage=1;
          collegeName="";
          item={};
@@ -60,7 +63,76 @@ $(document).ready(function () {
         str2=str2+"<span>跳转到第<input id='pageJump'style=\"width:30px;\">页  </span>";
         $("#pageCount").html(str2);
     }
+    $(document).on('click','.updateCollege',function () {
+        var id = $(this).attr("name");
+        getCollegeItem(id);
 
+    })
+    getCollegeItem = function(id){
+        $.ajax({
+            url:getCollegeItemUrl,//请求地址
+            async: false,
+            type:'post',//请求类型
+            data:{'id':id},//传入后台数据
+            dataType:'json',//后台返回数据类型
+            success : function(data) {
+                updateCollege(data);
+
+            },
+            error:function(data){
+            }
+        })
+    }
+
+    updateCollege = function(data){
+        $("#updateForm").show();
+        $(".module").hide();
+        str ="   <tr>\n" +
+            "      <td><input name=\"id\" value='"+data.id+" ' type=\"hidden\"/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>高校名称:</td>\n" +
+            "      <td><input  type=\"text\" name=\"name\" value='"+data.name+" '/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>所在地:</td>\n" +
+            "      <td><input  type=\"text\" name=\"sf\" value='"+data.sf+" '/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>高校详情:</td>\n" +
+            "      <td><input  type=\"text\" name=\"detail\" value='"+data.detail+" '/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td colspan=\"2\">\n" +
+            "      <input type='button'  onclick=\"updateAjax()\" value=\"修改院校信息\"/>\n" +
+            "      </td>\n" +
+            "\n" +
+            "   </tr>";
+        $("#updateTable").html(str);
+    }
+    updateAjax = function(){
+        var param = $("#updateForm").serializeArray();
+        $.ajax({
+            url:updateUrl,//请求地址
+            async: false,
+            type:'post',//请求类型
+            data:{'data':JSON.stringify(param)},//传入后台数据
+            dataType:'text',//后台返回数据类型
+            success : function(data) {
+                alert("修改成功");
+                $("#updateForm").hide();
+                $(".module").show();
+                getData(url,currentPage,"",item);
+
+            },
+            error:function(data){
+            }
+        })
+    }
     $(document).on('click','.deleteCollege',function () {
         var id = $(this).attr("name");
         deleteCollege(id);

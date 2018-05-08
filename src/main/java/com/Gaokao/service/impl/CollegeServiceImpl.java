@@ -39,6 +39,12 @@ public class CollegeServiceImpl implements CollegeInfoService {
     }
 
     @Override
+    public void updateCollege(CollegeInfo collegeInfo) {
+
+        collegeInfoMapper.updateCollege(collegeInfo);
+    }
+
+    @Override
     public void deleteCollege(String id) {
         collegeInfoMapper.deleteCollege(id);
     }

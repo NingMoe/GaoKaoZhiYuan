@@ -25,6 +25,8 @@ public class CollegePlanInfo {
     //位次差
     private int dislocation;
     private int totalRecord;
+    private int flag;
+    private int year;
 
 
     public CollegePlanInfo() {
@@ -156,5 +158,21 @@ public class CollegePlanInfo {
 
     public void setTotalRecord(int totalRecord) {
         this.totalRecord = totalRecord;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 }

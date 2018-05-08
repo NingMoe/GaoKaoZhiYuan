@@ -68,8 +68,7 @@
                     <ul class="widget widget-menu unstyled">
                         <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 政策解读 </a></li>
                         <li><a id="talkOnline"><i class="menu-icon icon-bold"></i> 在线咨询 </a></li>
-                        <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 查询往年一分一段表 </a></li>
-                        <li><a href="ui-typography.html"><i class="menu-icon icon-book"></i>查询往年高校招生计划 </a></li>
+                        <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 查询最新一分一段表 </a></li>
                         <li><a id="planAll"><i class="menu-icon icon-book"></i>填报志愿 </a></li>
                         <li><a id="applicationAll"><i class="menu-icon icon-bold"></i> 查看志愿 </a></li>
                     </ul>

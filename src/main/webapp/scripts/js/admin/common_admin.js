@@ -20,7 +20,7 @@ $(document).ready(function () {
             success : function(page) {
                 $("tbody").html("");
                 $("#pageCount").html("");
-                if(url.indexOf("selectSuitCollegePlan")>0)
+                if(url.indexOf("Plan")>0)
                     initPlanHtml(page);
                 if(url.indexOf("selectAllCollege")>0)
                     initCollegeHtml(page);
@@ -41,6 +41,10 @@ $(document).ready(function () {
             addUser(addUrl);
         if(addUrl.indexOf("college")>0)
             addCollege(addUrl);
+        if(addUrl.indexOf("major")>0)
+            addMajor(addUrl);
+        if(addUrl.indexOf("plan")>0)
+            addPlan(addUrl);
     })
 
 

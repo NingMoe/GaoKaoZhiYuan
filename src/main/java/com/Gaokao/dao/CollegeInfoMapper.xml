@@ -8,6 +8,7 @@
         <id property="id" column="college_id" />
         <result property="name" column="college_name" />
         <result property="type" column="type_id" />
+        <result property="detail" column="college_detail" />
         <result property="cc" column="college_cc" />
     </resultMap>
     <select id="getAllCollege"  resultMap="collegeResultMap">
@@ -29,4 +30,9 @@
     <delete id="deleteCollege" parameterType="com.Gaokao.entity.CollegeInfo">
         DELETE FROM college WHERE  college_id = #{id}
     </delete>
+    <update id="updateCollege" parameterType="com.Gaokao.entity.CollegeInfo">
+        update college
+        set college_name = #{name},sf = #{sf},college_detail = #{detail}
+        where college_id = #{id}
+    </update>
 </mapper>
