@@ -16,4 +16,15 @@
         select * from major
         where major_name like #{pattern}
     </select>
+    <select id="getMajorById"  resultMap="majorResultMap">
+	select * from major
+	where major_id=#{id}
+    </select>
+    <insert id="addMajor"  parameterType="com.Gaokao.entity.MajorInfo">
+	insert into major(major_id,major_name)
+	values(#{id},#{name})
+    </insert>
+    <delete id="deleteMajor" parameterType="com.Gaokao.entity.MajorInfo">
+        DELETE FROM major WHERE  major_id = #{id}
+    </delete>
 </mapper>
