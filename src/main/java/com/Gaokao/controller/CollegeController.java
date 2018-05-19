@@ -3,6 +3,7 @@ package com.Gaokao.controller;
 import com.Gaokao.entity.CollegeInfo;
 import com.Gaokao.entity.Page;
 import com.Gaokao.service.CollegeInfoService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/college")
@@ -66,5 +69,62 @@ public class CollegeController {
         }
         pageInfo.setRow(collegeInfoPageList);
         return pageInfo;
+    }
+    @RequestMapping("/addCollegeInfo")
+    @ResponseBody
+    public String addCollegeInfo( @RequestParam(value="data", defaultValue="")String data){
+
+        JSONArray json = JSONArray.fromObject(data);
+        CollegeInfo collegeInfo = new CollegeInfo();
+        Map collegeMap = new HashMap();
+        if(json.size()>0){
+            for(int i=0;i<json.size();i++){
+                // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+                JSONObject job = json.getJSONObject(i);
+                // 得到 每个对象中的属性值
+                collegeMap.put(job.get("name"),job.get("value"));
+            }
+        }
+        collegeInfo.setId((String) collegeMap.get("id"));
+        collegeInfo.setName((String) collegeMap.get("name"));
+        collegeInfo.setSf((String) collegeMap.get("sf"));
+        collegeInfo.setDetail((String) collegeMap.get("detail"));
+        collegeInfoService.addCollege(collegeInfo);
+        return "success";
+    }
+
+    @RequestMapping("/deleteCollegeInfo")
+    @ResponseBody
+    public String deleteCollegeInfo(@RequestParam(value="id", defaultValue="1")String id){
+        collegeInfoService.deleteCollege(id);
+        return "success";
+    }
+    @RequestMapping("/getCollegeItem")
+    @ResponseBody
+    public CollegeInfo getCollegeItem(@RequestParam(value="id", defaultValue="1")String id){
+       return  collegeInfoService.getAppById(id);
+    }
+
+    @RequestMapping("/updateCollegeInfo")
+    @ResponseBody
+    public String updateCollegeInfo( @RequestParam(value="data", defaultValue="")String data){
+
+        JSONArray json = JSONArray.fromObject(data);
+        CollegeInfo collegeInfo = new CollegeInfo();
+        Map collegeMap = new HashMap();
+        if(json.size()>0){
+            for(int i=0;i<json.size();i++){
+                // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+                JSONObject job = json.getJSONObject(i);
+                // 得到 每个对象中的属性值
+                collegeMap.put(job.get("name"),job.get("value"));
+            }
+        }
+        collegeInfo.setId(StringUtils.deleteWhitespace((String) collegeMap.get("id")));
+        collegeInfo.setName(StringUtils.deleteWhitespace((String) collegeMap.get("name")));
+        collegeInfo.setSf(StringUtils.deleteWhitespace((String) collegeMap.get("sf")));
+        collegeInfo.setDetail(StringUtils.deleteWhitespace((String) collegeMap.get("detail")));
+        collegeInfoService.updateCollege(collegeInfo);
+        return "success";
     }
 }

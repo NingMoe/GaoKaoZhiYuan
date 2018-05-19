@@ -21,4 +21,19 @@ public class MajorServiceImpl implements MajorInfoService {
     public List getMajorByName(String name) {
         return majorInfoMapper.getMajorByName(name);
     }
+
+    @Override
+    public boolean addMajor(MajorInfo majorInfo) {
+           MajorInfo majInfo =  majorInfoMapper.getMajorById(majorInfo.getId());
+           if(majInfo==null){
+               majorInfoMapper.addMajor(majorInfo);
+               return true;
+           }
+           return false;
+    }
+
+    @Override
+    public void deleteMajor(String id) {
+        majorInfoMapper.deleteMajor(id);
+    }
 }

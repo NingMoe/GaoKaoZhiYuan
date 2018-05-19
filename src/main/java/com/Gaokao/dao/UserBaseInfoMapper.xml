@@ -16,9 +16,16 @@
     <select id="getUserById"  resultMap="userResultMap">
         select * from user_base_info where uid=#{id}
     </select>
+    <select id="getAllUser"  resultMap="userResultMap">
+        select * from user_base_info
+    </select>
     <insert id="addUser"  parameterType="com.Gaokao.entity.UserBaseInfo">
 	insert into user_base_info(login_name,password)
 	values(#{loginName},#{passwd})
+    </insert>
+    <insert id="addUserGetId"  parameterType="com.Gaokao.entity.UserBaseInfo" useGeneratedKeys="true" keyProperty="id" keyColumn="uid">
+	insert into user_base_info(login_name,relname,password,address,phone)
+	values(#{loginName},#{realName},#{passwd},#{address},#{phone})
     </insert>
     <update id="updateUserInfo" parameterType="com.Gaokao.entity.UserBaseInfo">
     update
@@ -27,5 +34,8 @@
     where
     uid=#{0}
 </update>
+    <delete id="deleteUser" parameterType="com.Gaokao.entity.UserBaseInfo">
+        DELETE FROM user_base_info WHERE  uid = #{id}
+    </delete>
 
 </mapper>

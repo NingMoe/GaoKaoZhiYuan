@@ -1,9 +1,11 @@
 package com.Gaokao.entity;
 
+import java.io.Serializable;
+
 /**
  * 高考各科成绩实体类
  */
-public class ExamScoreInfo {
+public class ExamScoreInfo implements Serializable {
     private int subjectId;
     private String subjectName;
     private int score;

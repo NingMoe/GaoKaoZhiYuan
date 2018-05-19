@@ -20,8 +20,8 @@
     <div class="navbar-inner">
         <div class="container">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                <i class="icon-reorder shaded"></i></a><a class="brand" >${user.realName}</a>
-            <span id="userInfoId" style="display: none">${user.id}</span>
+                <i class="icon-reorder shaded"></i></a><a class="brand" >${admin.loginName}</a>
+            <span id="userInfoId" style="display: none">${admin.id}</span>
             <div class="nav-collapse collapse navbar-inverse-collapse">
                 <ul class="nav nav-icons">
                     <li class="active"><a href="#"><i class="icon-envelope"></i></a></li>
@@ -59,18 +59,16 @@
             <div class="span3">
                 <div class="sidebar">
                     <ul class="widget widget-menu unstyled">
-                        <li class="active"><a id="collegeAll"><i class="menu-icon icon-dashboard"></i>查询高校信息
+                        <li class="active"><a id="collegeAll"><i class="menu-icon icon-dashboard"></i>高校信息管理
                         </a></li>
-                        <li><a id="majorAll"><i class="menu-icon icon-bullhorn"></i>查询专业信息</a>
+                        <li><a id="majorAll"><i class="menu-icon icon-bullhorn"></i>专业信息管理</a>
                         </li>
                     </ul>
 
                     <ul class="widget widget-menu unstyled">
-                        <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 政策解读 </a></li>
-                        <li><a id="talkOnline"><i class="menu-icon icon-bold"></i> 在线咨询 </a></li>
-                        <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 查询最新一分一段表 </a></li>
-                        <li><a id="planAll"><i class="menu-icon icon-book"></i>填报志愿 </a></li>
-                        <li><a id="applicationAll"><i class="menu-icon icon-bold"></i> 查看志愿 </a></li>
+                        <li><a id="planAll"><i class="menu-icon icon-bold"></i> 高校招生计划管理 </a></li>
+                        <li><a id="policyAll"><i class="menu-icon icon-bold"></i> 政策信息管理 </a></li>
+                        <li><a id="userAll"><i class="menu-icon icon-bold"></i> 用户信息管理 </a></li>
                     </ul>
                 </div>
                 <!--/.sidebar-->
@@ -101,13 +99,6 @@
                                         <option>哲学</option>
                                     </optgroup>
                                 </select>
-                                <select class="selectpicker" id="priorSelect" name="rankSelect"
-                                        data-width="100%" style="width:  100px;margin-right:  50px">
-                                    <optgroup label="类别">
-                                        <option>专业优先</option>
-                                        <option>院校优先</option>
-                                    </optgroup>
-                                </select>
                             </div>
                         </div>
                         <input style="height: 30px;" type="text" class="span3" id="searchMajorInput" placeholder="专业名查询">
@@ -118,62 +109,78 @@
                         <button class="btn" style="margin-left: 10px;" type="button" id="compareBtn">
                             高校对比
                         </button>
+                        <button class="btn" style="margin-left: 10px;" type="button" id="addBtn">
+                            新增
+                        </button>
                         <button class="btn" style="margin-left: 10px;" type="button" id="homeBtn">
                             回到首页
                         </button>
                     </form>
-                        <div id="talkdiv" style="display: none">
-                            Welcome<br/><textarea id="text" type="text"></textarea>
-                            <button onclick="send()">发送消息</button>
-                            <hr/>
-                            <button onclick="closeWebSocket()">关闭WebSocket连接</button>
-                            <hr/>
-                            <p id = "pid">${user.realName}</p>
-                            <div id="message" style="width: 500px;;height:500px; overflow:auto;"></div>
-                        </div>
-                        <div class="module">
-                            <div class="module-head" id="table_head">
-                            </div>
-                            <div class="module-body table">
-                                <table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display"
-                                       width="100%" style="table-layout:  fixed;">
-                                    <thead>
-
-                                    </thead>
-
-                                    <tbody>
-
-                                    </tbody>
-                                    <tfoot>
-                                    </tfoot>
-                                </table>
-                                <div id="pageCount"></div>
-                            </div>
-                        </div>
-                        <!--/.module-->
+                    <div id="talkdiv" style="display: none">
+                        Welcome<br/><textarea id="text" type="text"></textarea>
+                        <button onclick="send()">发送消息</button>
+                        <hr/>
+                        <button onclick="closeWebSocket()">关闭WebSocket连接</button>
+                        <hr/>
+                        <p id = "pid">${user.realName}</p>
+                        <div id="message" style="width: 500px;;height:500px; overflow:auto;"></div>
                     </div>
-                    <!--/.content-->
-                </div>
-                <!--/.span9-->
-            </div>
-        </div>
-        <!--/.container-->
-    </div>
-    <!--/.wrapper-->
-    <div class="footer">
-    </div>
+                    <div>
+                        <form id="addForm" action="#" method="post" style="display: none">
+                            <table id = "addTable"  cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display"
+                                   width="100%" style="table-layout:  fixed;">
 
-    <script src="../scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
-    <script src="../scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
-    <script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../scripts/flot/jquery.flot.js" type="text/javascript"></script>
-    <script src="../scripts/flot/jquery.flot.resize.js" type="text/javascript"></script>
-    <script src="../scripts/js/common.js" type="text/javascript"></script>
-    <script src="../scripts/js/userInfo.js" type="text/javascript"></script>
-    <script src="../scripts/js/college.js" type="text/javascript"></script>
-    <script src="../scripts/js/major.js" type="text/javascript"></script>
-    <script src="../scripts/js/collegePlan.js" type="text/javascript"></script>
-    <script src="../scripts/js/collegeAppliaction.js" type="text/javascript"></script>
-<script src="../scripts/js/talk.js" type="text/javascript"></script>
-    <script src="../scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
+                            </table>
+                        </form>
+                        <form id="updateForm" action="#" method="post" style="display: none">
+                            <table id = "updateTable"  cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display"
+                                   width="100%" style="table-layout:  fixed;">
+
+                            </table>
+                        </form>
+                    </div>
+                    <div class="module">
+                        <div class="module-head" id="table_head">
+                        </div>
+                        <div class="module-body table">
+                            <table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display"
+                                   width="100%" style="table-layout:  fixed;">
+                                <thead>
+
+                                </thead>
+
+                                <tbody>
+
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+
+                            <div id="pageCount"></div>
+                        </div>
+                    </div>
+                    <!--/.module-->
+                </div>
+                <!--/.content-->
+            </div>
+            <!--/.span9-->
+        </div>
+    </div>
+    <!--/.container-->
+</div>
+<!--/.wrapper-->
+<div class="footer">
+</div>
+
+<script src="../scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="../scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../scripts/flot/jquery.flot.js" type="text/javascript"></script>
+<script src="../scripts/flot/jquery.flot.resize.js" type="text/javascript"></script>
+<script src="../scripts/js/admin/common_admin.js" type="text/javascript"></script>
+<script src="../scripts/js/admin/userShow.js" type="text/javascript"></script>
+<script src="../scripts/js/admin/college.js" type="text/javascript"></script>
+<script src="../scripts/js/admin/major.js" type="text/javascript"></script>
+<script src="../scripts/js/admin/collegePlan.js" type="text/javascript"></script>
+<script src="../scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
 </body>

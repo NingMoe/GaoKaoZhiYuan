@@ -4,6 +4,7 @@ $(document).ready(function () {
     var flag = false;
     $('#majorAll').click(function () {
         $(".navbar-search.pull-left.input-append").show();
+        $("#searchMajorInput").hide();
         $("#searchInput").val("");
         url = majorUrl;
         majorName = "";

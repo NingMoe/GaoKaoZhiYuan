@@ -12,6 +12,12 @@
     <select id="getScoreByUid"  resultMap="scoreResultMap">
         select * from exam_score where uid=#{id}
     </select>
-
+    <select id="getScoreCidByName"  resultType="int">
+       select cid from exam_subject where cname=#{cname}
+    </select>
+    <insert id="addExamScore"  parameterType="com.Gaokao.entity.ExamScoreInfo">
+	insert into exam_score
+	values(#{subjectId},#{subjectName},#{uid},#{score})
+    </insert>
 
 </mapper>

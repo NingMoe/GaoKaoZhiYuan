@@ -1,24 +1,17 @@
 package com.Gaokao.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
-/**
- * 用户基本信息实体类
- */
-public class UserBaseInfo implements Serializable {
+public class AdminBaseInfo implements Serializable {
     private int id;
     private String loginName;
     private String passwd;
-    private String realName;
     private String address;
     private String phone;
     private String sex;
-    private List<ExamScoreInfo> scoreList;
 
-    public UserBaseInfo() {
+    public AdminBaseInfo() {
     }
-
 
     public int getId() {
         return id;
@@ -44,14 +37,6 @@ public class UserBaseInfo implements Serializable {
         this.passwd = passwd;
     }
 
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -74,13 +59,5 @@ public class UserBaseInfo implements Serializable {
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public List<ExamScoreInfo> getScoreList() {
-        return scoreList;
-    }
-
-    public void setScoreList(List scoreList) {
-        this.scoreList = scoreList;
     }
 }

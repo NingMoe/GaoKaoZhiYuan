@@ -26,7 +26,7 @@
                 <i class="icon-reorder shaded"></i>
             </a>
 
-            <a class="brand" href="userLogin.jsp">
+            <a class="brand" href="adminLogin.jsp">
                 高考志愿填报系统
             </a>
 
@@ -37,8 +37,8 @@
                     <li><a href="../register/index.do">
                         Sign Up
                     </a></li>
-                    <li><a href="../login/adminIndex.do">
-                        Admin
+                    <li><a href="../login/index.do">
+                        User
                     </a></li>
 
 
@@ -57,9 +57,9 @@
     <div class="container">
         <div class="row">
             <div class="module module-login span4 offset4">
-                <form class="form-vertical" action="../login/userlogin.do" method="post" >
+                <form class="form-vertical" action="../login/adminLogin.do" method="post" >
                     <div class="module-head">
-                        <h3>Sign In</h3>
+                        <h3>Admin Sign In</h3>
                     </div>
                     <div class="module-body">
                         <div class="control-group">

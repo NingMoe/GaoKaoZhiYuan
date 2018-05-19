@@ -1,6 +1,9 @@
 $(document).ready(function () {
     var collegeUrl=genurl+"/college/selectAllCollege.do";
-
+    var addCollegeUrl = genurl+"/college/addCollegeInfo.do";
+    var deleteCollegeUrl = genurl+"/college/deleteCollegeInfo.do";
+    var updateCollegeUrl = genurl+"/college/updateCollegeInfo.do";
+    var getCollegeItemUrl = genurl+"/college/getCollegeItem.do";
 //判断是否是对比查询引起的翻页行为
     var flag = false;
     var temp = {};
@@ -13,6 +16,8 @@ $(document).ready(function () {
         var array = "";
         $("#searchInput").val("");
          url = collegeUrl;
+        addUrl = addCollegeUrl;
+        updateUrl = updateCollegeUrl;
          currentPage=1;
          collegeName="";
          item={};
@@ -29,6 +34,7 @@ $(document).ready(function () {
             "<th style=\"\n" + " text-align:center;\n" + "\""+">高校名称</th>" +
             "<th style=\"\n" + " text-align:center;\n" + "\""+">所在地</th>" +
             "<th style=\"\n" + " text-align:center;\n" + "\""+">高校详情</th>" +
+            "<th style=\"\n" + " text-align:center;\n" + "\""+">操作</th>" +
             "</tr>");
         var data = page.row;
         currentPage = page.currentPage;
@@ -40,8 +46,10 @@ $(document).ready(function () {
                 "<td>" + ((data[i].id!=null)?data[i].id:"") + "</td>" +
                 "<td>" + ((data[i].name!=null)?data[i].name:"")+ "</td>" +
                 "<td>"+((data[i].sf!=null)?data[i].sf:"") +"</td>" +
-                "<td>" + ((data[i].detail!=null)?data[i].detail:"") + "</td>" +
-                "</tr>";
+                "<td>" + ((data[i].detail!=null)?data[i].detail:"") + "</td>" ;
+            str = str+"<td><button  class='deleteCollege licy-btn licy-btn-primary'style='border-color:#bd362f;background-color: #bd362f' name='" + data[i].id + "'style='width: 52px'>-删除</button>" +
+                "<button class='updateCollege licy-btn licy-btn-primary'style='border-color:#2192a8;background-color: #2192a8' name='" + data[i].id + "'>修改</button> </td>" ;
+            str =  str+ "</tr>";
         }
         $("tbody").html(str);
         var str2 = "";
@@ -55,6 +63,128 @@ $(document).ready(function () {
         str2=str2+"<span>跳转到第<input id='pageJump'style=\"width:30px;\">页  </span>";
         $("#pageCount").html(str2);
     }
+    $(document).on('click','.updateCollege',function () {
+        var id = $(this).attr("name");
+        getCollegeItem(id);
+
+    })
+    getCollegeItem = function(id){
+        $.ajax({
+            url:getCollegeItemUrl,//请求地址
+            async: false,
+            type:'post',//请求类型
+            data:{'id':id},//传入后台数据
+            dataType:'json',//后台返回数据类型
+            success : function(data) {
+                updateCollege(data);
+
+            },
+            error:function(data){
+            }
+        })
+    }
+
+    updateCollege = function(data){
+        $("#updateForm").show();
+        $(".module").hide();
+        str ="   <tr>\n" +
+            "      <td><input name=\"id\" value='"+data.id+" ' type=\"hidden\"/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>高校名称:</td>\n" +
+            "      <td><input  type=\"text\" name=\"name\" value='"+data.name+" '/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>所在地:</td>\n" +
+            "      <td><input  type=\"text\" name=\"sf\" value='"+data.sf+" '/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>高校详情:</td>\n" +
+            "      <td><input  type=\"text\" name=\"detail\" value='"+data.detail+" '/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td colspan=\"2\">\n" +
+            "      <input type='button'  onclick=\"updateAjax()\" value=\"修改院校信息\"/>\n" +
+            "      </td>\n" +
+            "\n" +
+            "   </tr>";
+        $("#updateTable").html(str);
+    }
+    updateAjax = function(){
+        var param = $("#updateForm").serializeArray();
+        $.ajax({
+            url:updateUrl,//请求地址
+            async: false,
+            type:'post',//请求类型
+            data:{'data':JSON.stringify(param)},//传入后台数据
+            dataType:'text',//后台返回数据类型
+            success : function(data) {
+                alert("修改成功");
+                $("#updateForm").hide();
+                $(".module").show();
+                getData(url,currentPage,"",item);
+
+            },
+            error:function(data){
+            }
+        })
+    }
+    $(document).on('click','.deleteCollege',function () {
+        var id = $(this).attr("name");
+        deleteCollege(id);
+    })
+    deleteCollege = function (id) {
+        $.ajax({
+            url:deleteCollegeUrl,//请求地址
+            async: false,
+            type:'post',//请求类型
+            data:{'id':id},//传入后台数据
+            dataType:'text',//后台返回数据类型
+            success : function(data) {
+                alert("删除成功");
+                getData(url,currentPage,collegeName,item);
+
+            },
+            error:function(data){
+            }
+        })
+    };
+    addCollege = function (addUrl) {
+        $("#addForm").show();
+        $(".module").hide();
+        str ="  <tr>\n" +
+            "     <td>高校代码:</td>\n" +
+            "     <td><input type=\"text\" name=\"id\">\n" +
+            "     </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>高校名称:</td>\n" +
+            "      <td><input  type=\"text\" name=\"name\"/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>所在地:</td>\n" +
+            "      <td><input  type=\"text\" name=\"sf\"/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>高校详情:</td>\n" +
+            "      <td><input  type=\"text\" name=\"detail\"/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td colspan=\"2\">\n" +
+            "      <input type='button'  onclick=\"addAjax()\" value=\"添加院校信息\"/>\n" +
+            "      </td>\n" +
+            "\n" +
+            "   </tr>";
+        $("#addTable").html(str);
+    }
+
     //添加对比
     $(document).on('click','.compare',function () {
         var id = $(this).attr("name");

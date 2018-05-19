@@ -1,8 +1,7 @@
 $(document).ready(function () {
-    var planUrl=genurl+"/collegeplan/selectSuitCollegePlan.do";
-    var addAppUrl = genurl+"/application/addApplication.do"
-    var deleteAppUrl = genurl+"/application/deleteApplication.do"
-    var getAppByUidUrl = genurl+"/application/getApplicatonByUid.do";
+    var planUrl=genurl+"/collegeplan/selectAllPlan.do";
+    var addPlanUrl = genurl+"/collegeplan/addPlanInfo.do";
+    var deletePlanUrl = genurl+"/collegeplan/deletePlan.do";
     //判断是否是对比查询引起的翻页行为
     var flag = false;
     var array="";
@@ -13,6 +12,7 @@ $(document).ready(function () {
         $("#searchMajorInput").show();
         $("#searchMajorInput").val("");
          url = planUrl;
+        addUrl = addPlanUrl;
          currentPage=1;
          collegeName="";
 
@@ -20,13 +20,11 @@ $(document).ready(function () {
         $(".form-group").show();
         $("#pageCount").show();
         $("#compareBtn").hide();
-        hasApplication();
         getData(url,currentPage,collegeName,item);
     });
 
     //根据数据动态绘制html
     initPlanHtml = function (page){
-        $("#pageCount").show();
         $('#table_head').html("<h3 >志愿填报<h3>");
         $("thead").html("<tr>" +
             "<th style=\"\n" + "width: 150px; text-align: center;\n" + "\">高校代码</th>" +
@@ -40,8 +38,6 @@ $(document).ready(function () {
             "<th style=\"\n" + " text-align:center;\n" + "\""+">计划招生人数</th>" +
             "<th style=\"\n" + " text-align:center;\n" + "\""+">分数线</th>" +
             "<th style=\"\n" + " text-align:center;\n" + "\""+">位次</th>" +
-            "<th style=\"\n" + " text-align:center;\n" + "\""+">位次差</th>" +
-            "<th style=\"\n" + " text-align:center;\n" + "\""+">录取概率</th>" +
             "<th style=\"\n" + " text-align:center;\n" + "\""+">操作</th>" +
             "</tr>");
         var data = page.row;
@@ -61,24 +57,9 @@ $(document).ready(function () {
                 "<td>" + ((data[i].xkkm3!=null)?data[i].xkkm3:"") + "</td>"+
                 "<td>" + ((data[i].jhzsrs!=null)?data[i].jhzsrs:"") + "</td>" +
                 "<td>" + ((data[i].scoreLine!=null)?data[i].scoreLine:"") + "</td>" +
-                "<td>" + ((data[i].num!=null)?data[i].num:"") + "</td>" +
-                "<td>" + ((data[i].poor!=null)?data[i].dislocation:"") + "</td>" ;
-            if(data[i].dislocation<=-5000){
-                str = str+"<td><button class='licy-btn licy-btn-primary ' disabled='true' style='border-color:#78ba00;background-color: #78ba00' name='" + data[i].zsId + "'>推荐</button></td>" ;
-            }
-            else if(data[i].dislocation<=5000){
-                str = str+"<td><button class='licy-btn licy-btn-primary ' disabled='true' style='border-color:#2192a8;background-color: #2192a8' name='" + data[i].zsId + "'>比较推荐</button></td>" ;
-            }
-            else if(data[i].dislocation<10000){
-                str = str+"<td><button class='licy-btn licy-btn-primary ' disabled='true' style='border-color:#df8505;background-color: #df8505' name='" + data[i].zsId + "'>可以冲</button></td>" ;
-            }
-            else {
-                str = str+"<td><button class='licy-btn licy-btn-primary ' disabled='true' style='border-color:#bd362f;background-color: #bd362f' name='" + data[i].zsId + "'>不推荐</button></td>" ;
-            }
-             if(!compareArray(data[i].zsId)) {
-                 str = str+"<td><button  class='addApplication licy-btn licy-btn-primary'style='border-color:#2192a8;background-color: #2192a8' name='" + data[i].zsId + "'>+添加志愿</button></td>" ;
-             }
-             else str = str+"<td><button  class='addApplication licy-btn licy-btn-primary'style='border-color:#bd362f;background-color: #bd362f' name='" + data[i].zsId + "'>-删除志愿</button></td>" ;
+                "<td>" + ((data[i].num!=null)?data[i].num:"") + "</td>" ;
+            str = str+"<td><button  class='deletePlan licy-btn licy-btn-primary'style='border-color:#bd362f;background-color: #bd362f' name='" + data[i].zsId + "'style='width: 52px'>-删除</button>" +
+                "<button class='updatePlan licy-btn licy-btn-primary'style='border-color:#2192a8;background-color: #2192a8' name='" + data[i].zsId + "'>修改</button> </td>" ;
             str = str + "</tr>";
         }
         $("tbody").html(str);
@@ -114,89 +95,87 @@ $(document).ready(function () {
         item.majorName = majorName;
         getData(url,currentPage,collegeName,item);
     })
-    addApplication = function (id,obj) {
-        $.ajax({
-            url:addAppUrl,//请求地址
-            async: false,
-            type:'post',//请求类型
-            data:{'zsid':id},//传入后台数据
-            dataType:'text',//后台返回数据类型
-            success : function(data) {
-                if(data=="success"){
-                    obj.html("-删除志愿");
-                    //改变按钮颜色
-                    obj.css("border-color",'#bd362f');
-                    obj.css("background-color",'#bd362f');
-                }
-            },
-            error:function(data){
-            }
-        })
-    };
-    compareArray = function(zsid){
-        var compareArray = {};
-        if(array!="") {
-            if (array.substring(array.length - 1, array.length) == ",") {
-                array.substring(0, array.length - 1);
-            }
-             compareArray = array.split(",");
-            zsid = ""+zsid+"";
-               if(compareArray.indexOf(zsid)>=0){
-                   return true;
-               }
-        }
-        return false;
-    };
-    hasApplication = function () {
-        $.ajax({
-            url:getAppByUidUrl,//请求地址
-            async: false,
-            type:'post',//请求类型
-            data:{},//传入后台数据
-            dataType:'text',//后台返回数据类型
-            success : function(appStr) {
-                array = appStr;
-            },
-            error:function(data){
-            }
-        })
-    };
-
-    deleteApplication = function (id,obj) {
-        $.ajax({
-            url:deleteAppUrl,//请求地址
-            async: false,
-            type:'post',//请求类型
-            data:{'zsid':id},//传入后台数据
-            dataType:'text',//后台返回数据类型
-            success : function(data) {
-              if(data=="success"){
-                  obj.html("+添加志愿");
-                  obj.css("border-color",'#2192a8');
-                  obj.css("background-color",'#2192a8');
-              }
-            },
-            error:function(data){
-            }
-        })
-    };
-    //添加志愿
-    $(document).on('click','.addApplication',function () {
+    addPlan = function (addUrl) {
+        $("#addForm").show();
+        $(".module").hide();
+        str ="  <tr>\n" +
+            "     <td>招生代码:</td>\n" +
+            "     <td><input type=\"text\" name=\"zsId\">\n" +
+            "     </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>高校代码:</td>\n" +
+            "      <td><input  type=\"text\" name=\"collegeId\"/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>专业代码:</td>\n" +
+            "      <td><input  type=\"text\" name=\"majorId\"/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>专业名称:</td>\n" +
+            "      <td><input  type=\"text\" name=\"majorName\"/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>选考科目1:</td>\n" +
+            "      <td><input  type=\"text\" name=\"xkkm1\"/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>选考科目2:</td>\n" +
+            "      <td><input  type=\"text\" name=\"xkkm2\"/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>选考科目3:</td>\n" +
+            "      <td><input  type=\"text\" name=\"xkkm3\"/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>分数线:</td>\n" +
+            "      <td><input  type=\"text\" name=\"scoreLine\"/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>位次:</td>\n" +
+            "      <td><input  type=\"text\" name=\"num\"/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td>计划招生人数:</td>\n" +
+            "      <td><input  type=\"text\" name=\"jhzsrs\"/>\n" +
+            "      </td>\n" +
+            "   </tr>\n" +
+            "   <tr>\n" +
+            "      <td colspan=\"2\">\n" +
+            "      <input type='button'  onclick=\"addAjax()\" value=\"添加招生计划信息\"/>\n" +
+            "      </td>\n" +
+            "\n" +
+            "   </tr>";
+        $("#addTable").html(str);
+    }
+    $(document).on('click','.deletePlan',function () {
         var id = $(this).attr("name");
-        var val = $(this).text();
-        var obj = $(this);
-        if(val=="+添加志愿") {
-            array = array + id + ",";
-            addApplication(id,obj);
-            alert("添加成功");
-
-        }
-        else if(confirm("是否删除该志愿?")){
-            array = array.replace(id+",","");
-            deleteApplication(id,obj);
-            alert("删除成功");
-            }
+        deletePlan(id);
     })
+    deletePlan = function (id) {
+        $.ajax({
+            url:deletePlanUrl,//请求地址
+            async: false,
+            type:'post',//请求类型
+            data:{'id':id},//传入后台数据
+            dataType:'text',//后台返回数据类型
+            success : function(data) {
+                alert("删除成功");
+                getData(url,currentPage,collegeName,item);
+
+            },
+            error:function(data){
+            }
+        })
+    };
 });
 
 

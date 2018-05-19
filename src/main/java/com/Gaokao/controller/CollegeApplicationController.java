@@ -68,7 +68,7 @@ public class CollegeApplicationController {
         List<CollegeApplicationInfo> appList = collegeApplicationService.getApplicationAllByUid(user.getId());
         pageInfo.setRow(appList,pageNum);
         List appPageList=new ArrayList();
-        for (int i = pageInfo.getBeginIndex();i<= pageInfo.getEndIndex();i++) {
+        for (int i = pageInfo.getBeginIndex();i< pageInfo.getEndIndex();i++) {
             CollegeApplicationInfo app = (CollegeApplicationInfo) pageInfo.getRow().get(i);
             if(app!=null) {
                 appPageList.add(app);
