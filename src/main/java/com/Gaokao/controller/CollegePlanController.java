@@ -138,4 +138,50 @@ public class CollegePlanController {
         collegePlanService.deletePlan(id);
         return "success";
     }
+
+    @RequestMapping("/recommendCollegePlan")
+    @ResponseBody
+    public Page recommendCollegePlan(@RequestParam(value="pageNum", defaultValue="1")int pageNum,
+                                      @RequestParam(value="name", defaultValue="")String collegeName,
+                                      @RequestParam(value="data", defaultValue="")String data,
+                                      HttpSession session){
+        //json解析
+        JSONObject jsonObject = JSONObject.fromObject(data);
+        String type =  jsonObject.get("type")==null?"综合":(String)jsonObject.get("type");
+        String priorStr =  jsonObject.get("prior")==null?"专业优先":(String)jsonObject.get("prior");
+        String majorName =  jsonObject.get("majorName")==null?"":(String)jsonObject.get("majorName");
+        String xkkm1 =  jsonObject.get("xkkm1")==null?"":(String)jsonObject.get("xkkm1");
+        String xkkm2 =  jsonObject.get("xkkm2")==null?"":(String)jsonObject.get("xkkm2");
+        String xkkm3 =  jsonObject.get("xkkm3")==null?"":(String)jsonObject.get("xkkm3");
+        int xkkmScore1 =  jsonObject.get("xkkmScore1")==null?0:Integer.parseInt((String)jsonObject.get("xkkmScore1"));
+        int xkkmScore2 =  jsonObject.get("xkkmScore1")==null?0:Integer.parseInt((String)jsonObject.get("xkkmScore1"));
+        int xkkmScore3 =  jsonObject.get("xkkmScore1")==null?0:Integer.parseInt((String)jsonObject.get("xkkmScore1"));
+        int mathScore =  jsonObject.get("mathScore")==null?0:Integer.parseInt((String)jsonObject.get("mathScore"));
+        int engScore =  jsonObject.get("engScore")==null?0:Integer.parseInt((String)jsonObject.get("engScore"));
+        int cnScore =  jsonObject.get("cnScore")==null?0:Integer.parseInt((String)jsonObject.get("cnScore"));
+        int prior = 0;
+        if(priorStr.equals("院校优先")){
+            prior = 1;
+        }
+
+        List<CollegePlanInfo> planInfoList;
+        collegeName = '%'+collegeName+'%';
+        majorName = '%'+majorName+'%';
+        Page pageInfo = new Page();
+        int startIndex = (pageNum-1)*pageInfo.getPageSize();
+        int totalScore=0;
+        totalScore = xkkmScore1+xkkmScore2+xkkmScore3+mathScore+engScore+cnScore;
+        //数据库分页查询招生计划
+        planInfoList = collegePlanService.getSuitPlan(xkkm1,xkkm2,xkkm3,collegeName,type,pageInfo.getPageSize(),startIndex,totalScore,majorName,prior);
+
+        int total = 0;
+        if(planInfoList!=null){
+            if(!planInfoList.isEmpty()) {
+                total = planInfoList.get(0).getTotalRecord();
+            }
+        }
+
+        pageInfo.setRow(planInfoList,pageNum,total);
+        return pageInfo;
+    }
 }

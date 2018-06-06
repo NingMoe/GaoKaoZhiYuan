@@ -16,7 +16,7 @@
               rel='stylesheet'>
     </head>
 <body>
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-fixed-top" style="width:  1770px;">
     <div class="navbar-inner">
         <div class="container">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
@@ -53,7 +53,7 @@
     <!-- /navbar-inner -->
 </div>
 <!-- /navbar -->
-<div class="wrapper">
+<div class="wrapper" style="width:  1770px;">
     <div class="container" style="width: 1770px">
         <div class="row">
             <div class="span3">
@@ -68,7 +68,6 @@
                     <ul class="widget widget-menu unstyled">
                         <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 政策解读 </a></li>
                         <li><a id="talkOnline"><i class="menu-icon icon-bold"></i> 在线咨询 </a></li>
-                        <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> 查询最新一分一段表 </a></li>
                         <li><a id="planAll"><i class="menu-icon icon-book"></i>填报志愿 </a></li>
                         <li><a id="applicationAll"><i class="menu-icon icon-bold"></i> 查看志愿 </a></li>
                     </ul>

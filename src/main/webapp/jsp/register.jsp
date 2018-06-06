@@ -46,7 +46,7 @@
     <div class="container">
         <div class="row">
             <div class="module module-login span4 offset4">
-                <form class="form-vertical" action="/ga/register/userRegister.do" method="post" id="registerForm">
+                <form class="form-vertical" action="../register/userRegister.do" method="post" id="registerForm">
                     <div class="module-head">
                         <h3>Sign up</h3>
                     </div>
@@ -75,6 +75,72 @@
                         <div class="control-group">
                             <div class="controls row-fluid">
                                 <input class="span12" type="text" name="sex" placeholder="sex">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls row-fluid">
+                                <input class="span12" type="text" name="mathScore" placeholder="数学分数">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls row-fluid">
+                                <input class="span12" type="text" name="engScore" placeholder="外语分数">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls row-fluid">
+                                <input class="span12" type="text" name="cnScore" placeholder="语文分数">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <select class="selectpicker" id="subSelect1" name="subSelect1"
+                                    data-width="100%" style="width: 60px;margin-right:  10px">
+                                <optgroup label="类别">
+                                    <option>物理</option>
+                                    <option>化学</option>
+                                    <option>生物</option>
+                                    <option>技术</option>
+                                    <option>政治</option>
+                                    <option>历史</option>
+                                    <option>地理</option>
+                                </optgroup>
+                            </select>
+                            <div class="controls row-fluid">
+                                <input class="span12" type="text" name="xkkmScore1" placeholder="选考科目1成绩">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <select class="selectpicker" id="subSelect2" name="subSelect2"
+                                    data-width="100%" style="width: 60px;margin-right:  10px">
+                                <optgroup label="类别">
+                                    <option>物理</option>
+                                    <option>化学</option>
+                                    <option>生物</option>
+                                    <option>技术</option>
+                                    <option>政治</option>
+                                    <option>历史</option>
+                                    <option>地理</option>
+                                </optgroup>
+                            </select>
+                            <div class="controls row-fluid">
+                                <input class="span12" type="text" name="xkkmScore2" placeholder="选考科目2成绩">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <select class="selectpicker" id="subSelect3" name="subSelect3"
+                                    data-width="100%" style="width: 60px;margin-right:  10px">
+                                <optgroup label="类别">
+                                    <option>物理</option>
+                                    <option>化学</option>
+                                    <option>生物</option>
+                                    <option>技术</option>
+                                    <option>政治</option>
+                                    <option>历史</option>
+                                    <option>地理</option>
+                                </optgroup>
+                            </select>
+                            <div class="controls row-fluid">
+                                <input class="span12" type="text" name="xkkmScore3" placeholder="选考科目3成绩">
                             </div>
                         </div>
                     </div>

@@ -2,6 +2,7 @@ $(document).ready(function () {
     var planUrl=genurl+"/collegeplan/selectAllPlan.do";
     var addPlanUrl = genurl+"/collegeplan/addPlanInfo.do";
     var deletePlanUrl = genurl+"/collegeplan/deletePlan.do";
+
     //判断是否是对比查询引起的翻页行为
     var flag = false;
     var array="";
@@ -20,6 +21,7 @@ $(document).ready(function () {
         $(".form-group").show();
         $("#pageCount").show();
         $("#compareBtn").hide();
+        $("#recommendBar").hide();
         getData(url,currentPage,collegeName,item);
     });
 
@@ -176,6 +178,7 @@ $(document).ready(function () {
             }
         })
     };
+
 });
 
 

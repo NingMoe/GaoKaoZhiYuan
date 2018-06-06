@@ -10,10 +10,10 @@ $(document).ready(function () {
         if ('WebSocket' in window) {
             //如果已经有连接，不允许新建连接
             if(websocket==null)
-            websocket = new WebSocket("ws://localhost:8080/ga/websocket");
+            websocket = new WebSocket("ws://localhost:8080/gaokao/websocket");
             //如果一条连接关闭，再次点击允许重开一条
             if(websocket.readyState==3)
-                websocket = new WebSocket("ws://localhost:8080/ga/websocket");
+                websocket = new WebSocket("ws://localhost:8080/gaokao/websocket");
         }
         else {
             alert('当前浏览器 Not support websocket')

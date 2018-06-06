@@ -38,6 +38,21 @@ public interface CollegePlanService {
      */
     public List getAllPlan(String collegeName,String type,int pageSize,int offset,String majorName,int prior);
 
+    /**
+     * 管理员推荐志愿
+     * @param xkkm1
+     * @param xkkm2
+     * @param xkkm3
+     * @param collegeName
+     * @param type
+     * @param pageSize
+     * @param offset
+     * @param majorName
+     * @param prior
+     * @return
+     */
+    public List getSuitPlan(String xkkm1,String xkkm2,String xkkm3,String collegeName,String type,int pageSize,int offset,int totalScore,String majorName,int prior );
+
     public void addPlan(CollegePlanInfo collegePlanInfo);
 
     public void updatePlan(CollegePlanInfo collegePlanInfo);

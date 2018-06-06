@@ -1,5 +1,6 @@
 package com.Gaokao.service;
 
+import com.Gaokao.entity.ExamScoreInfo;
 import com.Gaokao.entity.UserBaseInfo;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface UserInfoService {
     public void deleteUser(int id);
     public int updateUserInfo(int id,String loginName,String passwd);
     public List<UserBaseInfo> getAllUser();
+    public List<ExamScoreInfo> getExamScoreByUid(int uid);
 }
