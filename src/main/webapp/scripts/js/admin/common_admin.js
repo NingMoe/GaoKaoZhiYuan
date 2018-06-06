@@ -30,6 +30,8 @@ $(document).ready(function () {
                     initAppHtml(page);
                 if(url.indexOf("getAllUserInfo")>0)
                     initUserInfoHtml(page);
+                if(url.indexOf("recommend")>0)
+                    initRecommendHtml(page);
             },
             error:function(data){
             }
