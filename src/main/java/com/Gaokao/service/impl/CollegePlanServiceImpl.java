@@ -96,6 +96,13 @@ public class CollegePlanServiceImpl implements CollegePlanService {
     }
 
     @Override
+    public List getSuitPlan(String xkkm1, String xkkm2, String xkkm3, String collegeName, String type, int pageSize, int offset, int totalScore,String majorName, int prior) {
+        String bxkm = "不限";
+        List planSuitList = collegePlanMapper.getAllSuitPlan(xkkm1,xkkm2,xkkm3,bxkm,collegeName,type,pageSize,offset,totalScore,majorName,prior);
+        return planSuitList;
+    }
+
+    @Override
     public void addPlan(CollegePlanInfo collegePlanInfo) {
         CollegePlanInfo cpInfo = collegePlanMapper.getPlanById(collegePlanInfo.getZsId());
         if(cpInfo==null){

@@ -74,4 +74,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     public List<UserBaseInfo> getAllUser() {
         return userBaseInfoMapper.getAllUser();
     }
+
+    @Override
+    public List<ExamScoreInfo> getExamScoreByUid(int uid) {
+        return examScoreInfoMapper.getScoreByUid(uid);
+    }
 }
