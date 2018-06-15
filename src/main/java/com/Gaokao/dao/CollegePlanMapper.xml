@@ -48,8 +48,13 @@
         </if>
     </select>
     <select id="getAllSuitPlan"  resultMap="collegePlanResultMap" parameterType="Map">
-        select COUNT(1) OVER() AS total, c1.*,c2.college_name,c2.sf,(o.yfyf_lj-c1.num)dislocation from college_zsjh c1,college c2,college_rank cr,onepoint o
-        where c1.college_id =c2.college_id and cr.college_id=c2.college_id and FLAG = 1 and o.year = 2017 and o.yfyd_score = #{totalScore}
+        select COUNT(1) OVER() AS total, c1.*,c2.college_name,c2.sf,(o.yfyf_lj-c1.num)dislocation from college_zsjh
+        c1,college c2,college_rank cr,onepoint o
+        where c1.college_id =c2.college_id and cr.college_id=c2.college_id and FLAG = 1 and o.year = 2017 and
+        o.yfyd_score = #{totalScore}
+        <![CDATA[
+        and (o.yfyf_lj-c1.num)<=10000
+        ]]>
         and c1.zs_id in
         (
         SELECT zs_id from college_choose_subject
@@ -59,11 +64,17 @@
         where xkkm not in (#{xkkm1},#{xkkm2},#{xkkm3},#{bxkm})
         )
         )
+        <if test='area==1'>
+            and c2.college_name like '%浙江%'
+        </if>
+        <if test='area==2'>
+            and c2.college_name not like '%浙江%'
+        </if>
         <if test='collegeName!=""'>
-            and    c2.college_name like #{collegeName}
+            and c2.college_name like #{collegeName}
         </if>
         <if test='majorName!=""'>
-            and    c1.major_name like #{majorName}
+            and c1.major_name like #{majorName}
         </if>
         <if test='type!=""'>
             and cr.type=#{type}

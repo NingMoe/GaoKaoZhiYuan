@@ -107,6 +107,14 @@
                                         <option>院校优先</option>
                                     </optgroup>
                                 </select>
+                                <select class="selectpicker" id="areaSelect" name="rankSelect"
+                                        data-width="100%" style="width:  100px;margin-right:  50px">
+                                    <optgroup label="类别">
+                                        <option>全国</option>
+                                        <option>浙江省内</option>
+                                        <option>浙江省外</option>
+                                    </optgroup>
+                                </select>
                             </div>
                         </div>
                         <input style="height: 30px;" type="text" class="span3" id="searchMajorInput" placeholder="专业名查询">
@@ -116,6 +124,9 @@
                         </button>
                         <button class="btn" style="margin-left: 10px;" type="button" id="compareBtn">
                             高校对比
+                        </button>
+                        <button class="btn" style="margin-left: 10px;" type="button" id="execlBtn">
+                            导出execl
                         </button>
                         <button class="btn" style="margin-left: 10px;" type="button" id="homeBtn">
                             回到首页

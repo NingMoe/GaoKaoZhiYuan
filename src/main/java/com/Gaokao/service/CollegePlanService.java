@@ -24,7 +24,7 @@ public interface CollegePlanService {
      * @param prior （院校优先or专业优先）
      * @return
      */
-    public List getAllSuitPlan(List<ExamScoreInfo> scoreList,String collegeName,String type,int pageSize,int offset,int totalScore,String majorName,int prior);
+    public List getAllSuitPlan(List<ExamScoreInfo> scoreList,String collegeName,String type,int pageSize,int offset,int totalScore,String majorName,int prior,int area);
 
     /**
      * 获得所有招生计划（不带入分数和选考科目）
@@ -51,7 +51,7 @@ public interface CollegePlanService {
      * @param prior
      * @return
      */
-    public List getSuitPlan(String xkkm1,String xkkm2,String xkkm3,String collegeName,String type,int pageSize,int offset,int totalScore,String majorName,int prior );
+    public List getSuitPlan(String xkkm1,String xkkm2,String xkkm3,String collegeName,String type,int pageSize,int offset,int totalScore,String majorName,int prior,int area );
 
     public void addPlan(CollegePlanInfo collegePlanInfo);
 

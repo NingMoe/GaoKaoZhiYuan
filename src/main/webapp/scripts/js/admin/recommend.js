@@ -66,9 +66,9 @@ $(document).ready(function () {
             else if(data[i].dislocation<10000){
                 str = str+"<td><button class='licy-btn licy-btn-primary ' disabled='true' style='border-color:#df8505;background-color: #df8505' name='" + data[i].zsId + "'>可以冲</button></td>" ;
             }
-            else {
-                str = str+"<td><button class='licy-btn licy-btn-primary ' disabled='true' style='border-color:#bd362f;background-color: #bd362f' name='" + data[i].zsId + "'>不推荐</button></td>" ;
-            }
+            // else {
+            //     str = str+"<td><button class='licy-btn licy-btn-primary ' disabled='true' style='border-color:#bd362f;background-color: #bd362f' name='" + data[i].zsId + "'>不推荐</button></td>" ;
+            // }
             str = str + "</tr>";
         }
         $("tbody").html(str);

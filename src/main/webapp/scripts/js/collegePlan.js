@@ -3,9 +3,11 @@ $(document).ready(function () {
     var addAppUrl = genurl+"/application/addApplication.do"
     var deleteAppUrl = genurl+"/application/deleteApplication.do"
     var getAppByUidUrl = genurl+"/application/getApplicatonByUid.do";
+    var getExeclUrl =genurl+"/collegeplan/getExecl.do";
     //判断是否是对比查询引起的翻页行为
     var flag = false;
     var array="";
+    var execl = 0;
     $('#planAll').click(function(){
         $(".navbar-search.pull-left.input-append").show();
         //清空查询框
@@ -15,7 +17,6 @@ $(document).ready(function () {
          url = planUrl;
          currentPage=1;
          collegeName="";
-
          item={};
         $(".form-group").show();
         $("#pageCount").show();
@@ -97,6 +98,20 @@ $(document).ready(function () {
     $(document).on('change','#rankSelect',function () {
         var type = $(this).val();
         item.type = type;
+        var area = $("#areaSelect").val();
+        item.area = area;
+        collegeName = $("#searchInput").val();
+        var prior = $("#priorSelect").val();
+        item.prior = prior;
+        majorName = $("#searchMajorInput").val();
+        item.majorName = majorName;
+        getData(url,currentPage,collegeName,item);
+    })
+    $(document).on('change','#areaSelect',function () {
+        var type = $("#rankSelect").val();
+        var area = $(this).val();
+        item.area = area;
+        item.type = type;
         collegeName = $("#searchInput").val();
         var prior = $("#priorSelect").val();
         item.prior = prior;
@@ -107,6 +122,8 @@ $(document).ready(function () {
     $(document).on('change','#priorSelect',function () {
         var type = $("#rankSelect").val();
         item.type = type;
+        var area = $("#areaSelect").val();
+        item.area = area;
         collegeName = $("#searchInput").val();
         var prior = $(this).val();
         item.prior = prior;
@@ -196,6 +213,26 @@ $(document).ready(function () {
             deleteApplication(id,obj);
             alert("删除成功");
             }
+    })
+    //添加志愿
+    $(document).on('click','#execlBtn',function () {
+        execl = 1;
+        item.execl = execl;
+        collegeName = $("#searchInput").val();
+        $.ajax({
+            url:planUrl,//请求地址
+            async: false,
+            type:'post',//请求类型
+            data:{'name':collegeName,'data':JSON.stringify(item)},//传入后台数据
+            dataType:'json',//后台返回数据类型
+            success : function(data) {
+                execl = 0;
+                alert("导出execl成功!");
+            },
+            error:function(data){
+                execl = 0;
+            }
+        })
     })
 });
 
